@@ -1,0 +1,2247 @@
+{
+ "version": "Opquast V5 (2025-2030) + 3 règles V4 retirées en V5",
+ "licence": "Règles Opquast, Creative Commons BY-SA, https://checklists.opquast.com/ — reformulations courtes, pas l'intitulé officiel",
+ "a11y_note": "Correspondances indicatives avec le RGAA 4.1.2 et les WCAG 2.2. Une règle Opquast n'équivaut pas à un critère RGAA : la correspondance sert à repérer et prioriser, pas à établir une conformité.",
+ "how": {
+  "code": "code source du dépôt",
+  "live": "site en ligne : HTTP, en-têtes, pages rendues",
+  "dns": "enregistrements DNS",
+  "external": "hors dépôt et hors site (boîte mail, outil d'envoi, entité juridique) : souvent « à vérifier »",
+  "live+code": "les deux"
+ },
+ "themes": {
+  "1": "Contenus",
+  "2": "Données personnelles",
+  "3": "E-commerce",
+  "4": "Formulaires",
+  "5": "Identification et contact",
+  "6": "Images et médias",
+  "7": "Internationalisation",
+  "8": "Liens",
+  "9": "Navigation",
+  "10": "Lettre d'information",
+  "11": "Présentation",
+  "12": "Sécurité",
+  "13": "Serveur et performances",
+  "14": "Structure et code",
+  "15": "Règles V4 retirées en V5"
+ },
+ "rules": [
+  {
+   "id": 1,
+   "theme": 1,
+   "rule": "Les nouveaux contenus ou services peuvent être repérés",
+   "rule_en": "New content or services can be discovered",
+   "how": "code"
+  },
+  {
+   "id": 2,
+   "theme": 1,
+   "rule": "Les droits de copie et de réutilisation sont indiqués sur chaque page",
+   "rule_en": "Copy and reuse rights are shown on every page",
+   "how": "code"
+  },
+  {
+   "id": 3,
+   "theme": 1,
+   "rule": "Chaque page a une meta description",
+   "rule_en": "Each page has a meta description",
+   "how": "code"
+  },
+  {
+   "id": 4,
+   "theme": 1,
+   "rule": "Les dates sont écrites dans un format explicite",
+   "rule_en": "Dates use explicit formats",
+   "how": "code"
+  },
+  {
+   "id": 5,
+   "theme": 1,
+   "rule": "La première occurrence d'une abréviation est expliquée",
+   "rule_en": "First use of an abbreviation explains it",
+   "how": "code"
+  },
+  {
+   "id": 6,
+   "theme": 1,
+   "rule": "Les dates de publication sont indiquées quand c'est utile",
+   "rule_en": "Publication dates are shown where needed",
+   "how": "code"
+  },
+  {
+   "id": 7,
+   "theme": 1,
+   "rule": "Un glossaire explique les termes techniques ou du secteur",
+   "rule_en": "A glossary explains sector or technical terms",
+   "how": "code"
+  },
+  {
+   "id": 8,
+   "theme": 1,
+   "rule": "La publicité et les contenus sponsorisés sont signalés",
+   "rule_en": "Advertising and sponsored content is labelled",
+   "how": "code"
+  },
+  {
+   "id": 9,
+   "theme": 1,
+   "rule": "Les règles de modération des espaces publics sont indiquées",
+   "rule_en": "Moderation rules for public spaces are stated",
+   "how": "code"
+  },
+  {
+   "id": 10,
+   "theme": 1,
+   "rule": "Les contenus des espaces publics peuvent être prévisualisés avant envoi",
+   "rule_en": "Content for public spaces can be previewed before sending",
+   "how": "code"
+  },
+  {
+   "id": 11,
+   "theme": 1,
+   "rule": "Les espaces publics permettent de signaler un abus",
+   "rule_en": "Public spaces offer a way to report abuse",
+   "how": "code"
+  },
+  {
+   "id": 12,
+   "theme": 1,
+   "rule": "Chaque graphique est accompagné de ses données chiffrées",
+   "rule_en": "Each chart comes with its numbers",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "1.6"
+    ],
+    "wcag": [
+     "1.1.1"
+    ]
+   }
+  },
+  {
+   "id": 13,
+   "theme": 1,
+   "rule": "Les résultats de recherche indiquent le nombre de résultats et de pages",
+   "rule_en": "Search results show the number of results and pages",
+   "how": "code"
+  },
+  {
+   "id": 14,
+   "theme": 1,
+   "rule": "Les caractères ne sont pas détournés pour simuler une mise en forme",
+   "rule_en": "Characters are not misused to fake visual formatting",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "10.1"
+    ],
+    "wcag": [
+     "1.3.1"
+    ]
+   }
+  },
+  {
+   "id": 15,
+   "theme": 2,
+   "rule": "La politique de confidentialité est accessible depuis chaque page",
+   "rule_en": "The privacy policy is reachable from every page",
+   "how": "code"
+  },
+  {
+   "id": 16,
+   "theme": 2,
+   "rule": "La procédure d'accès et de rectification des données personnelles est décrite",
+   "rule_en": "The procedure to access and correct personal data is described",
+   "how": "code"
+  },
+  {
+   "id": 17,
+   "theme": 2,
+   "rule": "Un compte peut être créé sans passer par un service tiers",
+   "rule_en": "Accounts can be created without a third-party login",
+   "how": "code"
+  },
+  {
+   "id": 18,
+   "theme": 2,
+   "rule": "La création de compte est confirmée",
+   "rule_en": "Account creation is confirmed",
+   "how": "code"
+  },
+  {
+   "id": 19,
+   "theme": 2,
+   "rule": "Le vol de compte ou d'identité est prévenu",
+   "rule_en": "Account or identity theft is prevented",
+   "how": "code"
+  },
+  {
+   "id": 20,
+   "theme": 2,
+   "rule": "Un compte peut être fermé de la même façon qu'il a été ouvert",
+   "rule_en": "Accounts can be closed the same way they were opened",
+   "how": "code"
+  },
+  {
+   "id": 21,
+   "theme": 2,
+   "rule": "Les contenus personnels peuvent être sauvegardés depuis l'espace personnel",
+   "rule_en": "Personal content can be saved from a personal space",
+   "how": "code"
+  },
+  {
+   "id": 22,
+   "theme": 2,
+   "rule": "Tous les services utilisent les mêmes identifiants",
+   "rule_en": "All services use the same credentials",
+   "how": "code"
+  },
+  {
+   "id": 23,
+   "theme": 2,
+   "rule": "On peut se déconnecter des espaces privés",
+   "rule_en": "People can sign out of private spaces",
+   "how": "code"
+  },
+  {
+   "id": 24,
+   "theme": 2,
+   "rule": "Les adresses e-mail contenant un + sont acceptées",
+   "rule_en": "Email aliases with + are accepted",
+   "how": "code"
+  },
+  {
+   "id": 25,
+   "theme": 2,
+   "rule": "Les en-têtes serveur définissent une politique de référent",
+   "rule_en": "Server headers set a referrer policy",
+   "how": "live"
+  },
+  {
+   "id": 26,
+   "theme": 2,
+   "rule": "Aucune information ne révèle si un compte existe",
+   "rule_en": "No information reveals whether an account exists",
+   "how": "code"
+  },
+  {
+   "id": 27,
+   "theme": 2,
+   "rule": "Les échanges sensibles sont sécurisés et signalés comme tels",
+   "rule_en": "Sensitive exchanges are secured and shown as such",
+   "how": "live+code"
+  },
+  {
+   "id": 28,
+   "theme": 2,
+   "rule": "Les données sensibles ne transitent pas en clair dans les URL",
+   "rule_en": "Sensitive data is not sent in clear in URLs",
+   "how": "code"
+  },
+  {
+   "id": 29,
+   "theme": 2,
+   "rule": "Les finalités des cookies et l'effet de leur refus sont expliqués",
+   "rule_en": "Cookie purposes and the effect of refusing them are explained",
+   "how": "code"
+  },
+  {
+   "id": 30,
+   "theme": 3,
+   "rule": "L'achat est possible sans créer de compte",
+   "rule_en": "Purchase without creating an account",
+   "how": "code"
+  },
+  {
+   "id": 31,
+   "theme": 3,
+   "rule": "Le détail des articles est accessible depuis le panier",
+   "rule_en": "Item details from the cart",
+   "how": "code"
+  },
+  {
+   "id": 32,
+   "theme": 3,
+   "rule": "Rien n'est ajouté au panier sans action de l'utilisateur",
+   "rule_en": "Nothing added to the cart without the user",
+   "how": "code"
+  },
+  {
+   "id": 33,
+   "theme": 3,
+   "rule": "Les services additionnels ne sont pas pré-cochés",
+   "rule_en": "Add-on services not opted in by default",
+   "how": "code"
+  },
+  {
+   "id": 34,
+   "theme": 3,
+   "rule": "La disponibilité est indiquée avant la commande",
+   "rule_en": "Availability shown before ordering",
+   "how": "code"
+  },
+  {
+   "id": 35,
+   "theme": 3,
+   "rule": "Le délai de livraison est indiqué avant la commande",
+   "rule_en": "Delivery time shown before ordering",
+   "how": "code"
+  },
+  {
+   "id": 36,
+   "theme": 3,
+   "rule": "Les frais de livraison sont indiqués avant la commande",
+   "rule_en": "Delivery costs shown before ordering",
+   "how": "code"
+  },
+  {
+   "id": 37,
+   "theme": 3,
+   "rule": "Le mode d'obtention d'un bien numérique est indiqué avant la commande",
+   "rule_en": "How to get a digital good is stated before ordering",
+   "how": "code"
+  },
+  {
+   "id": 38,
+   "theme": 3,
+   "rule": "Les quantités du panier sont modifiables avant la commande",
+   "rule_en": "Cart quantities editable before ordering",
+   "how": "code"
+  },
+  {
+   "id": 39,
+   "theme": 3,
+   "rule": "La nature et la quantité des produits sont indiquées",
+   "rule_en": "Product nature and quantities stated",
+   "how": "code"
+  },
+  {
+   "id": 40,
+   "theme": 3,
+   "rule": "Les périodes et conditions des offres sont indiquées",
+   "rule_en": "Offer periods and conditions stated",
+   "how": "code"
+  },
+  {
+   "id": 41,
+   "theme": 3,
+   "rule": "Un récapitulatif détaillé est présenté avant la commande",
+   "rule_en": "Detailed subtotal before ordering",
+   "how": "code"
+  },
+  {
+   "id": 42,
+   "theme": 3,
+   "rule": "Les conditions de financement sont indiquées",
+   "rule_en": "Financing terms stated",
+   "how": "code"
+  },
+  {
+   "id": 43,
+   "theme": 3,
+   "rule": "Les conditions du service après-vente sont indiquées",
+   "rule_en": "After-sales service terms stated",
+   "how": "code"
+  },
+  {
+   "id": 44,
+   "theme": 3,
+   "rule": "Les modalités de facturation ou de prélèvement sont indiquées",
+   "rule_en": "Billing or charging terms stated",
+   "how": "code"
+  },
+  {
+   "id": 45,
+   "theme": 3,
+   "rule": "Les conditions de garantie sont indiquées",
+   "rule_en": "Warranty terms stated",
+   "how": "code"
+  },
+  {
+   "id": 46,
+   "theme": 3,
+   "rule": "Les conditions de vente ou d'utilisation sont accessibles depuis chaque page",
+   "rule_en": "Terms of sale or use are reachable from every page",
+   "how": "code"
+  },
+  {
+   "id": 47,
+   "theme": 3,
+   "rule": "La zone de livraison ou de service est indiquée",
+   "rule_en": "Delivery or service area stated",
+   "how": "code"
+  },
+  {
+   "id": 48,
+   "theme": 3,
+   "rule": "Les moyens de paiement acceptés sont indiqués",
+   "rule_en": "Accepted payment methods stated",
+   "how": "code"
+  },
+  {
+   "id": 49,
+   "theme": 3,
+   "rule": "Les prestataires de paiement sont identifiés",
+   "rule_en": "Payment providers identified",
+   "how": "code"
+  },
+  {
+   "id": 50,
+   "theme": 3,
+   "rule": "Les voies de recours en cas de litige figurent dans les conditions",
+   "rule_en": "Dispute remedies stated in the terms",
+   "how": "code"
+  },
+  {
+   "id": 51,
+   "theme": 3,
+   "rule": "L'adresse et les conditions de retour sont indiquées",
+   "rule_en": "Return address and conditions stated",
+   "how": "code"
+  },
+  {
+   "id": 52,
+   "theme": 3,
+   "rule": "Les frais de retour sont indiqués avant la commande",
+   "rule_en": "Return costs stated before ordering",
+   "how": "code"
+  },
+  {
+   "id": 53,
+   "theme": 3,
+   "rule": "La procédure de réclamation est indiquée",
+   "rule_en": "Complaint procedure stated",
+   "how": "code"
+  },
+  {
+   "id": 54,
+   "theme": 3,
+   "rule": "Les conditions de remboursement et d'annulation sont indiquées",
+   "rule_en": "Refund and cancellation terms stated",
+   "how": "code"
+  },
+  {
+   "id": 55,
+   "theme": 3,
+   "rule": "Le matériel et les logiciels nécessaires sont indiqués avant la commande",
+   "rule_en": "Required hardware and software stated before ordering",
+   "how": "code"
+  },
+  {
+   "id": 56,
+   "theme": 3,
+   "rule": "Les prix indiquent les taxes et le montant hors taxes",
+   "rule_en": "Prices show taxes and the pre-tax amount",
+   "how": "code"
+  },
+  {
+   "id": 57,
+   "theme": 3,
+   "rule": "Une adresse de livraison distincte est possible",
+   "rule_en": "A separate delivery address is possible",
+   "how": "code"
+  },
+  {
+   "id": 58,
+   "theme": 3,
+   "rule": "Au moins deux moyens de paiement sont proposés",
+   "rule_en": "At least two payment methods",
+   "how": "code"
+  },
+  {
+   "id": 59,
+   "theme": 3,
+   "rule": "Les données de carte ne sont conservées qu'avec consentement",
+   "rule_en": "Card data stored only with consent",
+   "how": "code"
+  },
+  {
+   "id": 60,
+   "theme": 3,
+   "rule": "Les données de carte enregistrées peuvent être modifiées ou supprimées",
+   "rule_en": "Stored card data can be changed or deleted",
+   "how": "code"
+  },
+  {
+   "id": 61,
+   "theme": 3,
+   "rule": "Une référence de transaction est affichée après la commande",
+   "rule_en": "Transaction reference shown after ordering",
+   "how": "code"
+  },
+  {
+   "id": 62,
+   "theme": 3,
+   "rule": "Les factures sont disponibles en ligne",
+   "rule_en": "Invoices available online",
+   "how": "code"
+  },
+  {
+   "id": 63,
+   "theme": 3,
+   "rule": "Chaque débit est confirmé par e-mail",
+   "rule_en": "Each charge is confirmed by email",
+   "how": "code"
+  },
+  {
+   "id": 64,
+   "theme": 3,
+   "rule": "Les labels et récompenses renvoient vers leur source",
+   "rule_en": "Labels and awards link to their source",
+   "how": "code"
+  },
+  {
+   "id": 65,
+   "theme": 3,
+   "rule": "Les produits indisponibles sont signalés",
+   "rule_en": "Unavailable products are marked",
+   "how": "code"
+  },
+  {
+   "id": 66,
+   "theme": 3,
+   "rule": "Un e-mail de confirmation de commande est envoyé",
+   "rule_en": "Order confirmation email sent",
+   "how": "code"
+  },
+  {
+   "id": 67,
+   "theme": 3,
+   "rule": "Chaque réclamation fait l'objet d'un accusé de réception",
+   "rule_en": "Each complaint is acknowledged",
+   "how": "code"
+  },
+  {
+   "id": 68,
+   "theme": 3,
+   "rule": "L'origine des produits est indiquée",
+   "rule_en": "Product origin stated",
+   "how": "code"
+  },
+  {
+   "id": 69,
+   "theme": 4,
+   "rule": "Chaque champ de formulaire a sa propre étiquette dans le code",
+   "rule_en": "Each form field has its own label in the code",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "11.1",
+     "11.2"
+    ],
+    "wcag": [
+     "1.3.1",
+     "3.3.2",
+     "4.1.2"
+    ]
+   }
+  },
+  {
+   "id": 70,
+   "theme": 4,
+   "rule": "Les informations complémentaires d'un champ lui sont reliées dans le code",
+   "rule_en": "Extra field information is linked to the field in the code",
+   "how": "code",
+   "a11y": {
+    "rgaa": [],
+    "wcag": [
+     "1.3.1"
+    ]
+   }
+  },
+  {
+   "id": 71,
+   "theme": 4,
+   "rule": "Les étiquettes indiquent si un champ est obligatoire",
+   "rule_en": "Labels say whether a field is required",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "11.10"
+    ],
+    "wcag": [
+     "3.3.2"
+    ]
+   }
+  },
+  {
+   "id": 72,
+   "theme": 4,
+   "rule": "Les formats de saisie attendus sont indiqués",
+   "rule_en": "Required input formats are stated",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "11.10"
+    ],
+    "wcag": [
+     "3.3.2"
+    ]
+   }
+  },
+  {
+   "id": 73,
+   "theme": 4,
+   "rule": "L'utilisateur est prévenu quand la saisie est sensible à la casse",
+   "rule_en": "People are told when input is case-sensitive",
+   "how": "code"
+  },
+  {
+   "id": 74,
+   "theme": 4,
+   "rule": "Les limites de caractères sont indiquées",
+   "rule_en": "Character limits are stated",
+   "how": "code"
+  },
+  {
+   "id": 75,
+   "theme": 4,
+   "rule": "La création d'un mot de passe prévient les erreurs de saisie",
+   "rule_en": "Password creation prevents typing errors",
+   "how": "code"
+  },
+  {
+   "id": 76,
+   "theme": 4,
+   "rule": "Les caractères d'un champ mot de passe peuvent être affichés",
+   "rule_en": "Password field characters can be shown",
+   "how": "code"
+  },
+  {
+   "id": 77,
+   "theme": 4,
+   "rule": "Chaque étiquette est visuellement accolée à son champ",
+   "rule_en": "Each label is visually attached to its field",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "11.4"
+    ],
+    "wcag": [
+     "3.3.2"
+    ]
+   }
+  },
+  {
+   "id": 78,
+   "theme": 4,
+   "rule": "Les informations contextuelles sont visuellement accolées à leur champ",
+   "rule_en": "Contextual information is visually attached to its field",
+   "how": "code"
+  },
+  {
+   "id": 79,
+   "theme": 4,
+   "rule": "Les champs refusés sont signalés",
+   "rule_en": "Rejected fields are pointed out",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "11.10"
+    ],
+    "wcag": [
+     "3.3.1"
+    ]
+   }
+  },
+  {
+   "id": 80,
+   "theme": 4,
+   "rule": "Les raisons du refus sont indiquées",
+   "rule_en": "Rejection reasons are given",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "11.11"
+    ],
+    "wcag": [
+     "3.3.3"
+    ]
+   }
+  },
+  {
+   "id": 81,
+   "theme": 4,
+   "rule": "Les données saisies restent modifiables après un refus",
+   "rule_en": "All entered data stays editable after rejection",
+   "how": "code"
+  },
+  {
+   "id": 82,
+   "theme": 4,
+   "rule": "Les messages d'erreur personnalisés sont dans la langue du formulaire",
+   "rule_en": "Custom error messages use the form’s language",
+   "how": "code"
+  },
+  {
+   "id": 83,
+   "theme": 4,
+   "rule": "Les formulaires en plusieurs pages affichent un récapitulatif avant envoi",
+   "rule_en": "Multi-page forms show a summary before sending",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "11.12"
+    ],
+    "wcag": [
+     "3.3.4"
+    ]
+   }
+  },
+  {
+   "id": 84,
+   "theme": 4,
+   "rule": "La page qui suit un formulaire permet de poursuivre",
+   "rule_en": "The page after a form lets people continue",
+   "how": "code"
+  },
+  {
+   "id": 85,
+   "theme": 4,
+   "rule": "L'envoi d'un formulaire indique son succès ou son échec",
+   "rule_en": "Submitting a form shows success or failure",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "7.5"
+    ],
+    "wcag": [
+     "4.1.3"
+    ]
+   }
+  },
+  {
+   "id": 86,
+   "theme": 4,
+   "rule": "Les processus complexes indiquent d'emblée ce qui est nécessaire",
+   "rule_en": "Complex processes say up front what is needed",
+   "how": "code"
+  },
+  {
+   "id": 87,
+   "theme": 4,
+   "rule": "Les processus complexes listent leurs étapes",
+   "rule_en": "Complex processes list their steps",
+   "how": "code"
+  },
+  {
+   "id": 88,
+   "theme": 4,
+   "rule": "L'étape en cours est indiquée",
+   "rule_en": "The current step is shown",
+   "how": "code"
+  },
+  {
+   "id": 89,
+   "theme": 4,
+   "rule": "Chaque étape permet de revenir en arrière",
+   "rule_en": "Each step allows going back",
+   "how": "code"
+  },
+  {
+   "id": 90,
+   "theme": 4,
+   "rule": "L'utilisateur est prévenu que le retour arrière fait perdre des données",
+   "rule_en": "People are warned that Back loses data",
+   "how": "code"
+  },
+  {
+   "id": 91,
+   "theme": 4,
+   "rule": "Avancer dans un processus conserve les données saisies",
+   "rule_en": "Moving through a process keeps entered data",
+   "how": "code"
+  },
+  {
+   "id": 92,
+   "theme": 4,
+   "rule": "Le copier-coller fonctionne dans les champs",
+   "rule_en": "Copy and paste work in fields",
+   "how": "code"
+  },
+  {
+   "id": 93,
+   "theme": 4,
+   "rule": "Les options des listes déroulantes sont regroupées quand c'est pertinent",
+   "rule_en": "Dropdown options are grouped where it makes sense",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "11.8"
+    ],
+    "wcag": [
+     "1.3.1"
+    ]
+   }
+  },
+  {
+   "id": 94,
+   "theme": 4,
+   "rule": "Les listes d'options suivent un ordre reconnaissable",
+   "rule_en": "Option lists follow a recognisable order",
+   "how": "code"
+  },
+  {
+   "id": 95,
+   "theme": 4,
+   "rule": "Les champs e-mail, URL, recherche, nombre, etc. utilisent le bon type",
+   "rule_en": "Email, URL, search, number and similar fields use the right type",
+   "how": "code"
+  },
+  {
+   "id": 96,
+   "theme": 4,
+   "rule": "Les codes de double authentification peuvent être renvoyés",
+   "rule_en": "Two-factor codes can be resent",
+   "how": "code"
+  },
+  {
+   "id": 97,
+   "theme": 4,
+   "rule": "Les champs autorisant l'autocomplétion sont identifiés dans le code",
+   "rule_en": "Fields that allow autocomplete are marked in the code",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "11.13"
+    ],
+    "wcag": [
+     "1.3.5"
+    ]
+   }
+  },
+  {
+   "id": 98,
+   "theme": 4,
+   "rule": "Les boutons désactivés restent perceptibles par les lecteurs d'écran",
+   "rule_en": "Disabled buttons stay visible to screen readers",
+   "how": "code"
+  },
+  {
+   "id": 99,
+   "theme": 5,
+   "rule": "La page d'accueil indique ce que propose le site",
+   "rule_en": "The home page says what the site offers",
+   "how": "code"
+  },
+  {
+   "id": 100,
+   "theme": 5,
+   "rule": "La page d'accueil indique le public visé",
+   "rule_en": "A specific target audience is stated on the home page",
+   "how": "code"
+  },
+  {
+   "id": 101,
+   "theme": 5,
+   "rule": "L'auteur, la société ou l'organisation est identifié",
+   "rule_en": "The author, company or organisation is identified",
+   "how": "code"
+  },
+  {
+   "id": 102,
+   "theme": 5,
+   "rule": "Le titre de chaque page identifie le site",
+   "rule_en": "Every page title identifies the site",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "8.5",
+     "8.6"
+    ],
+    "wcag": [
+     "2.4.2"
+    ]
+   }
+  },
+  {
+   "id": 103,
+   "theme": 5,
+   "rule": "Le titre de chaque page identifie son contenu",
+   "rule_en": "Every page title identifies its content",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "8.5",
+     "8.6"
+    ],
+    "wcag": [
+     "2.4.2"
+    ]
+   }
+  },
+  {
+   "id": 104,
+   "theme": 5,
+   "rule": "Les pages référencent un favicon valide",
+   "rule_en": "Pages reference a valid favicon",
+   "how": "live"
+  },
+  {
+   "id": 105,
+   "theme": 5,
+   "rule": "L'adresse postale complète et le téléphone figurent sur chaque page",
+   "rule_en": "Full postal address and phone number are on every page",
+   "how": "code"
+  },
+  {
+   "id": 106,
+   "theme": 5,
+   "rule": "Le numéro d'immatriculation légal est indiqué",
+   "rule_en": "The legal registration number is shown",
+   "how": "external"
+  },
+  {
+   "id": 107,
+   "theme": 5,
+   "rule": "Au moins deux moyens de contact sont proposés",
+   "rule_en": "At least two ways to make contact",
+   "how": "code"
+  },
+  {
+   "id": 108,
+   "theme": 5,
+   "rule": "Les délais de réponse aux demandes sont indiqués",
+   "rule_en": "Response times to enquiries are stated",
+   "how": "code"
+  },
+  {
+   "id": 109,
+   "theme": 5,
+   "rule": "Les horaires et tarifs du service sont indiqués",
+   "rule_en": "Service hours and prices are stated",
+   "how": "code"
+  },
+  {
+   "id": 110,
+   "theme": 5,
+   "rule": "Chaque demande fait l'objet d'un accusé de réception",
+   "rule_en": "Each enquiry is acknowledged",
+   "how": "external"
+  },
+  {
+   "id": 111,
+   "theme": 5,
+   "rule": "Chaque e-mail indique au moins un moyen de contact",
+   "rule_en": "Every email gives at least one contact method",
+   "how": "external"
+  },
+  {
+   "id": 112,
+   "theme": 5,
+   "rule": "Le support ou le service après-vente peut être contacté",
+   "rule_en": "Support or after-sales can be contacted",
+   "how": "code"
+  },
+  {
+   "id": 113,
+   "theme": 5,
+   "rule": "Les modérateurs des espaces publics peuvent être contactés",
+   "rule_en": "Public-space moderators can be contacted",
+   "how": "code"
+  },
+  {
+   "id": 114,
+   "theme": 5,
+   "rule": "La personne ou l'équipe responsable des contenus est identifiée",
+   "rule_en": "The person or team responsible for content is identified",
+   "how": "code"
+  },
+  {
+   "id": 115,
+   "theme": 5,
+   "rule": "Les normes déclarées renvoient vers leur source",
+   "rule_en": "Declared standards link to their source",
+   "how": "code"
+  },
+  {
+   "id": 116,
+   "theme": 6,
+   "rule": "Les images décoratives ont une alternative textuelle adaptée",
+   "rule_en": "Decorative images have a suitable text alternative",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "1.2"
+    ],
+    "wcag": [
+     "1.1.1"
+    ]
+   }
+  },
+  {
+   "id": 117,
+   "theme": 6,
+   "rule": "Les images-liens ont une alternative textuelle adaptée",
+   "rule_en": "Image links have a suitable text alternative",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "1.1",
+     "1.3",
+     "6.1"
+    ],
+    "wcag": [
+     "1.1.1",
+     "2.4.4"
+    ]
+   }
+  },
+  {
+   "id": 118,
+   "theme": 6,
+   "rule": "Les images informatives ont une alternative textuelle adaptée",
+   "rule_en": "Informative images have a suitable text alternative",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "1.1",
+     "1.3",
+     "1.6"
+    ],
+    "wcag": [
+     "1.1.1"
+    ]
+   }
+  },
+  {
+   "id": 119,
+   "theme": 6,
+   "rule": "Les vignettes ne sont pas des images plus grandes réduites par le navigateur",
+   "rule_en": "Thumbnails are not larger images shrunk in the browser",
+   "how": "code"
+  },
+  {
+   "id": 120,
+   "theme": 6,
+   "rule": "Les objets intégrés ont une alternative textuelle",
+   "rule_en": "Embedded objects have a text alternative",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "4.8"
+    ],
+    "wcag": [
+     "1.1.1"
+    ]
+   }
+  },
+  {
+   "id": 121,
+   "theme": 6,
+   "rule": "Chaque contenu audio et vidéo a une transcription textuelle",
+   "rule_en": "Each audio and video has a text transcript",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "4.1"
+    ],
+    "wcag": [
+     "1.2.1",
+     "1.2.3"
+    ]
+   }
+  },
+  {
+   "id": 122,
+   "theme": 6,
+   "rule": "Les vidéos ont des sous-titres synchronisés",
+   "rule_en": "Videos have synchronised captions",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "4.3"
+    ],
+    "wcag": [
+     "1.2.2"
+    ]
+   }
+  },
+  {
+   "id": 123,
+   "theme": 6,
+   "rule": "La durée des vidéos et contenus audio est indiquée",
+   "rule_en": "Video and audio duration is stated",
+   "how": "code"
+  },
+  {
+   "id": 124,
+   "theme": 6,
+   "rule": "Les vidéos ne démarrent qu'à la demande de l'utilisateur",
+   "rule_en": "Videos start only when people choose",
+   "how": "code"
+  },
+  {
+   "id": 125,
+   "theme": 6,
+   "rule": "Les sons ne démarrent qu'à la demande de l'utilisateur",
+   "rule_en": "Sounds start only when people choose",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "4.10"
+    ],
+    "wcag": [
+     "1.4.2"
+    ]
+   }
+  },
+  {
+   "id": 126,
+   "theme": 6,
+   "rule": "Les animations, sons et clignotements peuvent être mis en pause",
+   "rule_en": "Animations, sounds and flashing can be paused",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "13.7",
+     "13.8"
+    ],
+    "wcag": [
+     "2.2.2",
+     "2.3.1"
+    ]
+   }
+  },
+  {
+   "id": 127,
+   "theme": 6,
+   "rule": "Les animations ne bloquent ni la navigation ni le contenu",
+   "rule_en": "Animations do not block navigation or content",
+   "how": "code"
+  },
+  {
+   "id": 128,
+   "theme": 7,
+   "rule": "Les numéros de téléphone comportent l'indicatif international",
+   "rule_en": "Phone numbers include the international code",
+   "how": "code"
+  },
+  {
+   "id": 129,
+   "theme": 7,
+   "rule": "Les adresses postales indiquent le pays",
+   "rule_en": "Postal addresses include the country",
+   "how": "code"
+  },
+  {
+   "id": 130,
+   "theme": 7,
+   "rule": "Chaque page indique sa langue principale",
+   "rule_en": "Each page declares its main language",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "8.3",
+     "8.4"
+    ],
+    "wcag": [
+     "3.1.1"
+    ]
+   }
+  },
+  {
+   "id": 131,
+   "theme": 7,
+   "rule": "La langue de destination d'un lien est indiquée quand elle diffère",
+   "rule_en": "A link’s target language is shown when it differs",
+   "how": "code"
+  },
+  {
+   "id": 132,
+   "theme": 7,
+   "rule": "Chaque changement de langue est signalé",
+   "rule_en": "Each change of language is marked",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "8.7",
+     "8.8"
+    ],
+    "wcag": [
+     "3.1.2"
+    ]
+   }
+  },
+  {
+   "id": 133,
+   "theme": 7,
+   "rule": "Les liens de traduction mènent à la même page dans l'autre langue",
+   "rule_en": "Translation links lead to the same page in the other language",
+   "how": "code"
+  },
+  {
+   "id": 134,
+   "theme": 7,
+   "rule": "Les liens vers les autres langues sont écrits dans la langue cible",
+   "rule_en": "Links to other language versions are written in that language",
+   "how": "code"
+  },
+  {
+   "id": 135,
+   "theme": 7,
+   "rule": "Le site respecte l'ordre des langues du navigateur",
+   "rule_en": "The site follows the browser’s language order",
+   "how": "live+code"
+  },
+  {
+   "id": 136,
+   "theme": 8,
+   "rule": "Chaque lien a un intitulé dans le code",
+   "rule_en": "Each link has a name in the code",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "6.2"
+    ],
+    "wcag": [
+     "2.4.4",
+     "4.1.2"
+    ]
+   }
+  },
+  {
+   "id": 137,
+   "theme": 8,
+   "rule": "Chaque intitulé de lien décrit sa fonction ou sa destination",
+   "rule_en": "Each link label describes its function or target",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "6.1"
+    ],
+    "wcag": [
+     "2.4.4"
+    ]
+   }
+  },
+  {
+   "id": 138,
+   "theme": 8,
+   "rule": "Les liens de même nature ont le même aspect et le même comportement",
+   "rule_en": "Links of the same kind look and behave the same",
+   "how": "code"
+  },
+  {
+   "id": 139,
+   "theme": 8,
+   "rule": "Le soulignement est réservé aux liens",
+   "rule_en": "Underline is reserved for links",
+   "how": "code"
+  },
+  {
+   "id": 140,
+   "theme": 8,
+   "rule": "Les liens se distinguent du reste du contenu",
+   "rule_en": "Links stand out from the surrounding content",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "10.6"
+    ],
+    "wcag": [
+     "1.4.1"
+    ]
+   }
+  },
+  {
+   "id": 141,
+   "theme": 8,
+   "rule": "Les liens visités et non visités sont différenciés",
+   "rule_en": "Visited and unvisited links look different",
+   "how": "code"
+  },
+  {
+   "id": 142,
+   "theme": 8,
+   "rule": "Les liens internes et externes sont différenciés",
+   "rule_en": "Internal and external links are distinguished",
+   "how": "code"
+  },
+  {
+   "id": 143,
+   "theme": 8,
+   "rule": "Les liens internes vers des contenus à accès restreint sont signalés",
+   "rule_en": "Internal links to restricted content are marked",
+   "how": "code"
+  },
+  {
+   "id": 144,
+   "theme": 8,
+   "rule": "Les liens qui ouvrent un autre logiciel le signalent",
+   "rule_en": "Links that open other software say so",
+   "how": "code"
+  },
+  {
+   "id": 145,
+   "theme": 8,
+   "rule": "Les numéros de téléphone sont cliquables avec tel:",
+   "rule_en": "Phone numbers are clickable with tel:",
+   "how": "code"
+  },
+  {
+   "id": 146,
+   "theme": 8,
+   "rule": "L'utilisateur est prévenu quand un lien ouvre une nouvelle fenêtre",
+   "rule_en": "People are warned when a link opens a new window",
+   "how": "code"
+  },
+  {
+   "id": 147,
+   "theme": 8,
+   "rule": "Le format des fichiers en téléchargement est indiqué",
+   "rule_en": "Downloadable file formats are stated",
+   "how": "code"
+  },
+  {
+   "id": 148,
+   "theme": 8,
+   "rule": "Le poids des fichiers en téléchargement est indiqué",
+   "rule_en": "Downloadable file sizes are stated",
+   "how": "code"
+  },
+  {
+   "id": 149,
+   "theme": 8,
+   "rule": "La langue des téléchargements est indiquée quand elle diffère",
+   "rule_en": "Download languages are stated when different",
+   "how": "code"
+  },
+  {
+   "id": 150,
+   "theme": 8,
+   "rule": "Le nom des fichiers téléchargés identifie leur contenu et leur origine",
+   "rule_en": "Download file names identify content and source",
+   "how": "code"
+  },
+  {
+   "id": 151,
+   "theme": 8,
+   "rule": "Les liens entrants ne sont pas restreints",
+   "rule_en": "Inbound links are not restricted",
+   "how": "code"
+  },
+  {
+   "id": 152,
+   "theme": 8,
+   "rule": "Tous les liens internes fonctionnent",
+   "rule_en": "All internal links work",
+   "how": "live"
+  },
+  {
+   "id": 153,
+   "theme": 9,
+   "rule": "Les contenus sont disponibles immédiatement quand ils ne visent pas un public particulier",
+   "rule_en": "Content is available at once when not meant for a specific audience",
+   "how": "code"
+  },
+  {
+   "id": 154,
+   "theme": 9,
+   "rule": "La navigation n'ouvre pas de fenêtres pop-up",
+   "rule_en": "Navigation opens no popups",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "13.2"
+    ],
+    "wcag": [
+     "3.2.1"
+    ]
+   }
+  },
+  {
+   "id": 155,
+   "theme": 9,
+   "rule": "La page d'accueil est accessible depuis chaque page",
+   "rule_en": "The home page is reachable from every page",
+   "how": "code"
+  },
+  {
+   "id": 156,
+   "theme": 9,
+   "rule": "Chaque page indique sa place dans le site",
+   "rule_en": "Each page shows where it sits in the site",
+   "how": "code"
+  },
+  {
+   "id": 157,
+   "theme": 9,
+   "rule": "Les éléments de menu actifs sont signalés",
+   "rule_en": "Active menu items are marked",
+   "how": "code"
+  },
+  {
+   "id": 158,
+   "theme": 9,
+   "rule": "Les blocs de navigation de même nature restent au même endroit",
+   "rule_en": "Navigation blocks of the same kind stay in the same place",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "12.2"
+    ],
+    "wcag": [
+     "3.2.3"
+    ]
+   }
+  },
+  {
+   "id": 159,
+   "theme": 9,
+   "rule": "Les icônes de navigation ont un intitulé explicite",
+   "rule_en": "Navigation icons have an explicit label",
+   "how": "code"
+  },
+  {
+   "id": 160,
+   "theme": 9,
+   "rule": "Les commandes de fermeture sont visuellement accolées à leur fenêtre",
+   "rule_en": "Close controls are visually attached to their window",
+   "how": "code"
+  },
+  {
+   "id": 161,
+   "theme": 9,
+   "rule": "Les commandes de fermeture sont disponibles immédiatement",
+   "rule_en": "Close controls are available immediately",
+   "how": "code"
+  },
+  {
+   "id": 162,
+   "theme": 9,
+   "rule": "Les fenêtres de dialogue ont un bouton de fermeture explicite",
+   "rule_en": "Dialogs have an explicit close button",
+   "how": "code"
+  },
+  {
+   "id": 163,
+   "theme": 9,
+   "rule": "Les commandes de fermeture sont au même endroit sur chaque page",
+   "rule_en": "Close controls are in the same place on every page",
+   "how": "code"
+  },
+  {
+   "id": 164,
+   "theme": 9,
+   "rule": "Chaque page commence par des liens d'évitement",
+   "rule_en": "Each page starts with skip links",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "12.7"
+    ],
+    "wcag": [
+     "2.4.1"
+    ]
+   }
+  },
+  {
+   "id": 165,
+   "theme": 9,
+   "rule": "Le focus clavier n'est jamais supprimé ni masqué",
+   "rule_en": "Keyboard focus is never removed or hidden",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "10.7"
+    ],
+    "wcag": [
+     "2.4.7"
+    ]
+   }
+  },
+  {
+   "id": 166,
+   "theme": 9,
+   "rule": "Tout fonctionne au clavier",
+   "rule_en": "Everything works with the keyboard",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "7.3",
+     "12.9"
+    ],
+    "wcag": [
+     "2.1.1",
+     "2.1.2"
+    ]
+   }
+  },
+  {
+   "id": 167,
+   "theme": 9,
+   "rule": "Le focus clavier suit un ordre prévisible",
+   "rule_en": "Keyboard focus moves in a predictable order",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "12.8"
+    ],
+    "wcag": [
+     "2.4.3"
+    ]
+   }
+  },
+  {
+   "id": 168,
+   "theme": 9,
+   "rule": "Un moteur de recherche interne est proposé",
+   "rule_en": "An internal search engine is offered",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "12.1",
+     "12.5"
+    ],
+    "wcag": [
+     "2.4.5"
+    ]
+   }
+  },
+  {
+   "id": 169,
+   "theme": 9,
+   "rule": "Chaque page de résultats a sa propre adresse",
+   "rule_en": "Each results page has its own address",
+   "how": "code"
+  },
+  {
+   "id": 170,
+   "theme": 9,
+   "rule": "Une recherche peut être relancée depuis ses résultats",
+   "rule_en": "A search can be run again from its results",
+   "how": "code"
+  },
+  {
+   "id": 171,
+   "theme": 9,
+   "rule": "Un plan du site est accessible depuis chaque page",
+   "rule_en": "A site map is reachable from every page",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "12.1",
+     "12.3",
+     "12.4"
+    ],
+    "wcag": [
+     "2.4.5"
+    ]
+   }
+  },
+  {
+   "id": 172,
+   "theme": 9,
+   "rule": "Les limites de temps sont indiquées",
+   "rule_en": "Time limits are stated",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "13.1"
+    ],
+    "wcag": [
+     "2.2.1"
+    ]
+   }
+  },
+  {
+   "id": 173,
+   "theme": 10,
+   "rule": "L'inscription à la lettre d'information est confirmée",
+   "rule_en": "Newsletter sign-up is confirmed",
+   "how": "external"
+  },
+  {
+   "id": 174,
+   "theme": 10,
+   "rule": "Chaque lettre d'information contient un lien de désinscription",
+   "rule_en": "Each newsletter has an unsubscribe link",
+   "how": "external"
+  },
+  {
+   "id": 175,
+   "theme": 10,
+   "rule": "La désinscription ne demande pas de confirmation par e-mail",
+   "rule_en": "Unsubscribing needs no email confirmation",
+   "how": "external"
+  },
+  {
+   "id": 176,
+   "theme": 10,
+   "rule": "On peut se désinscrire depuis le site",
+   "rule_en": "People can unsubscribe from the site",
+   "how": "external"
+  },
+  {
+   "id": 177,
+   "theme": 10,
+   "rule": "La dernière lettre d'information est en ligne",
+   "rule_en": "The latest newsletter is online",
+   "how": "external"
+  },
+  {
+   "id": 178,
+   "theme": 10,
+   "rule": "Les archives de la lettre d'information sont en ligne",
+   "rule_en": "Newsletter archives are online",
+   "how": "external"
+  },
+  {
+   "id": 179,
+   "theme": 10,
+   "rule": "La fréquence d'envoi est indiquée avant l'inscription",
+   "rule_en": "Sending frequency is shown before subscribing",
+   "how": "external"
+  },
+  {
+   "id": 180,
+   "theme": 11,
+   "rule": "L'identité visuelle est cohérente d'une page à l'autre",
+   "rule_en": "The visual identity is consistent across pages",
+   "how": "code"
+  },
+  {
+   "id": 181,
+   "theme": 11,
+   "rule": "L'information n'est pas transmise uniquement par la couleur",
+   "rule_en": "Information is not conveyed by colour alone",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "3.1"
+    ],
+    "wcag": [
+     "1.4.1"
+    ]
+   }
+  },
+  {
+   "id": 182,
+   "theme": 11,
+   "rule": "Le texte est suffisamment contrasté avec son arrière-plan",
+   "rule_en": "Text has enough contrast with its background",
+   "how": "live",
+   "a11y": {
+    "rgaa": [
+     "3.2",
+     "3.3"
+    ],
+    "wcag": [
+     "1.4.3",
+     "1.4.11"
+    ]
+   }
+  },
+  {
+   "id": 183,
+   "theme": 11,
+   "rule": "Les pages restent compréhensibles sans les styles",
+   "rule_en": "Pages keep their meaning without styles",
+   "how": "live",
+   "a11y": {
+    "rgaa": [
+     "10.2",
+     "10.3"
+    ],
+    "wcag": [
+     "1.3.1",
+     "1.3.2"
+    ]
+   }
+  },
+  {
+   "id": 184,
+   "theme": 11,
+   "rule": "Les contenus ne sont pas identifiés uniquement par leur forme ou leur position",
+   "rule_en": "Content is not identified only by shape or position",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "10.9",
+     "10.10"
+    ],
+    "wcag": [
+     "1.3.3"
+    ]
+   }
+  },
+  {
+   "id": 185,
+   "theme": 11,
+   "rule": "Les contenus destinés aux lecteurs d'écran ne leur sont pas masqués",
+   "rule_en": "Content meant for screen readers is not hidden from them",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "10.8"
+    ],
+    "wcag": [
+     "1.3.1",
+     "4.1.2"
+    ]
+   }
+  },
+  {
+   "id": 186,
+   "theme": 11,
+   "rule": "Les zones cliquables sont suffisamment grandes",
+   "rule_en": "Clickable targets are large enough",
+   "how": "live",
+   "a11y": {
+    "rgaa": [],
+    "wcag": [
+     "2.5.8"
+    ]
+   }
+  },
+  {
+   "id": 187,
+   "theme": 11,
+   "rule": "Le texte stylable n'est pas remplacé par des images",
+   "rule_en": "Styleable text is not replaced by images",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "1.8"
+    ],
+    "wcag": [
+     "1.4.5"
+    ]
+   }
+  },
+  {
+   "id": 188,
+   "theme": 11,
+   "rule": "Les contenus générés par CSS ont une alternative",
+   "rule_en": "Content generated by CSS has an alternative",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "10.2"
+    ],
+    "wcag": [
+     "1.3.1"
+    ]
+   }
+  },
+  {
+   "id": 189,
+   "theme": 11,
+   "rule": "Les symboles typographiques ont une alternative",
+   "rule_en": "Typographic symbols have an alternative",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "13.5"
+    ],
+    "wcag": [
+     "1.1.1"
+    ]
+   }
+  },
+  {
+   "id": 190,
+   "theme": 11,
+   "rule": "Une famille de police générique est le dernier recours",
+   "rule_en": "A generic font family is the last fallback",
+   "how": "code"
+  },
+  {
+   "id": 191,
+   "theme": 11,
+   "rule": "Le texte n'est pas justifié",
+   "rule_en": "Text is not justified",
+   "how": "code"
+  },
+  {
+   "id": 192,
+   "theme": 11,
+   "rule": "Les capitales décoratives sont obtenues par les styles",
+   "rule_en": "Decorative capitals come from styles",
+   "how": "code"
+  },
+  {
+   "id": 193,
+   "theme": 11,
+   "rule": "Le zoom n'est pas bloqué",
+   "rule_en": "Zoom is not blocked",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "10.4"
+    ],
+    "wcag": [
+     "1.4.4"
+    ]
+   }
+  },
+  {
+   "id": 194,
+   "theme": 11,
+   "rule": "Le site s'adapte aux appareils mobiles",
+   "rule_en": "The site adapts to mobile devices",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "10.11"
+    ],
+    "wcag": [
+     "1.4.10"
+    ]
+   }
+  },
+  {
+   "id": 195,
+   "theme": 11,
+   "rule": "Des styles d'impression sont fournis",
+   "rule_en": "Print styles are provided",
+   "how": "code"
+  },
+  {
+   "id": 196,
+   "theme": 11,
+   "rule": "Les pages s'impriment sans les blocs de navigation",
+   "rule_en": "Pages print without navigation blocks",
+   "how": "code"
+  },
+  {
+   "id": 197,
+   "theme": 12,
+   "rule": "Toutes les pages utilisent HTTPS",
+   "rule_en": "Every page uses HTTPS",
+   "how": "live"
+  },
+  {
+   "id": 198,
+   "theme": 12,
+   "rule": "Les certificats sont signés et valides",
+   "rule_en": "Certificates are signed and valid",
+   "how": "live"
+  },
+  {
+   "id": 199,
+   "theme": 12,
+   "rule": "Les pages HTTPS envoient Strict-Transport-Security",
+   "rule_en": "HTTPS pages send Strict-Transport-Security",
+   "how": "live"
+  },
+  {
+   "id": 200,
+   "theme": 12,
+   "rule": "Les pages HTTPS ne chargent aucune ressource en http",
+   "rule_en": "HTTPS pages load no http resources",
+   "how": "live"
+  },
+  {
+   "id": 201,
+   "theme": 12,
+   "rule": "Les opérations sur le mot de passe se font entièrement en ligne",
+   "rule_en": "Password operations can be done fully online",
+   "how": "code"
+  },
+  {
+   "id": 202,
+   "theme": 12,
+   "rule": "L'utilisateur peut choisir et modifier son mot de passe",
+   "rule_en": "People can choose and change their password",
+   "how": "code"
+  },
+  {
+   "id": 203,
+   "theme": 12,
+   "rule": "La robustesse du mot de passe est expliquée",
+   "rule_en": "Password strength is explained",
+   "how": "code"
+  },
+  {
+   "id": 204,
+   "theme": 12,
+   "rule": "Le mot de passe peut être réinitialisé",
+   "rule_en": "Passwords can be reset",
+   "how": "code"
+  },
+  {
+   "id": 205,
+   "theme": 12,
+   "rule": "Les mots de passe ne transitent jamais en clair",
+   "rule_en": "Passwords are never sent in clear",
+   "how": "live+code"
+  },
+  {
+   "id": 206,
+   "theme": 12,
+   "rule": "Les en-têtes désactivent le reniflage MIME",
+   "rule_en": "Headers disable MIME sniffing",
+   "how": "live"
+  },
+  {
+   "id": 207,
+   "theme": 12,
+   "rule": "Le serveur indique le type MIME de chaque ressource",
+   "rule_en": "The server states each resource’s MIME type",
+   "how": "live"
+  },
+  {
+   "id": 208,
+   "theme": 12,
+   "rule": "La sécurité des transactions est expliquée",
+   "rule_en": "Transaction security is explained",
+   "how": "code"
+  },
+  {
+   "id": 209,
+   "theme": 12,
+   "rule": "Les listes de répertoires ne sont pas servies",
+   "rule_en": "Directory listings are not served",
+   "how": "live"
+  },
+  {
+   "id": 210,
+   "theme": 12,
+   "rule": "Une protection contre le cross-site scripting est envoyée",
+   "rule_en": "Cross-site scripting protection is sent",
+   "how": "live"
+  },
+  {
+   "id": 211,
+   "theme": 12,
+   "rule": "Les en-têtes indiquent quels sites peuvent intégrer les pages dans un cadre",
+   "rule_en": "Headers state which sites may frame the pages",
+   "how": "live"
+  },
+  {
+   "id": 212,
+   "theme": 12,
+   "rule": "Une politique de sécurité restreint l'origine des contenus",
+   "rule_en": "A security policy restricts content origins",
+   "how": "live"
+  },
+  {
+   "id": 213,
+   "theme": 12,
+   "rule": "Le serveur ne révèle pas son logiciel",
+   "rule_en": "The server does not reveal its software",
+   "how": "live"
+  },
+  {
+   "id": 214,
+   "theme": 12,
+   "rule": "Les ressources tierces ont un contrôle d'intégrité valide",
+   "rule_en": "Third-party resources have a valid integrity check",
+   "how": "code"
+  },
+  {
+   "id": 215,
+   "theme": 12,
+   "rule": "Les opérations sécurisées peuvent être confirmées de deux façons",
+   "rule_en": "Secure operations can be confirmed in two ways",
+   "how": "code"
+  },
+  {
+   "id": 216,
+   "theme": 12,
+   "rule": "La barre d'adresse du navigateur n'est pas masquée",
+   "rule_en": "The browser address bar is not hidden",
+   "how": "code"
+  },
+  {
+   "id": 217,
+   "theme": 12,
+   "rule": "Le domaine d'envoi des e-mails est authentifié",
+   "rule_en": "The mail domain is authenticated",
+   "how": "dns"
+  },
+  {
+   "id": 218,
+   "theme": 13,
+   "rule": "L'adresse fonctionne avec et sans www",
+   "rule_en": "The address works with and without www",
+   "how": "live"
+  },
+  {
+   "id": 219,
+   "theme": 13,
+   "rule": "Le fichier robots.txt donne des instructions aux robots",
+   "rule_en": "robots.txt gives instructions to crawlers",
+   "how": "live"
+  },
+  {
+   "id": 220,
+   "theme": 13,
+   "rule": "Un plan de site XML liste les contenus à explorer",
+   "rule_en": "A sitemap lists the content to crawl",
+   "how": "live"
+  },
+  {
+   "id": 221,
+   "theme": 13,
+   "rule": "Le serveur n'impose pas de version mobile",
+   "rule_en": "The server does not force a mobile version",
+   "how": "live"
+  },
+  {
+   "id": 222,
+   "theme": 13,
+   "rule": "Les ressources absentes renvoient un code HTTP 404",
+   "rule_en": "Missing resources return HTTP 404",
+   "how": "live"
+  },
+  {
+   "id": 223,
+   "theme": 13,
+   "rule": "Le serveur renvoie une page 404 personnalisée",
+   "rule_en": "The server sends a custom 404 page",
+   "how": "live"
+  },
+  {
+   "id": 224,
+   "theme": 13,
+   "rule": "Le serveur renvoie une page 403 personnalisée",
+   "rule_en": "The server sends a custom 403 page",
+   "how": "live"
+  },
+  {
+   "id": 225,
+   "theme": 13,
+   "rule": "Les pages d'erreur personnalisées contiennent la navigation principale",
+   "rule_en": "Custom error pages include the main navigation",
+   "how": "live"
+  },
+  {
+   "id": 226,
+   "theme": 13,
+   "rule": "Les contenus sont compressés pour les clients qui l'acceptent",
+   "rule_en": "Compressed content is sent to clients that accept it",
+   "how": "live"
+  },
+  {
+   "id": 227,
+   "theme": 13,
+   "rule": "Des informations de mise en cache sont envoyées",
+   "rule_en": "Caching information is sent",
+   "how": "live"
+  },
+  {
+   "id": 228,
+   "theme": 13,
+   "rule": "Les en-têtes indiquent le jeu de caractères",
+   "rule_en": "Headers state the character set",
+   "how": "live"
+  },
+  {
+   "id": 229,
+   "theme": 13,
+   "rule": "Les feuilles de style sont minifiées",
+   "rule_en": "Stylesheets are minified",
+   "how": "code"
+  },
+  {
+   "id": 230,
+   "theme": 13,
+   "rule": "Les scripts sont minifiés",
+   "rule_en": "Scripts are minified",
+   "how": "code"
+  },
+  {
+   "id": 231,
+   "theme": 14,
+   "rule": "Les dates de publication ou de mise à jour sont lisibles par les machines",
+   "rule_en": "Publication or update dates are machine-readable",
+   "how": "code"
+  },
+  {
+   "id": 232,
+   "theme": 14,
+   "rule": "Chaque page déclare son jeu de caractères dans une balise meta",
+   "rule_en": "Each page declares its character set in a meta",
+   "how": "live"
+  },
+  {
+   "id": 233,
+   "theme": 14,
+   "rule": "L'UTF-8 est utilisé",
+   "rule_en": "UTF-8 is used",
+   "how": "code"
+  },
+  {
+   "id": 234,
+   "theme": 14,
+   "rule": "Chaque page a une structure de titres hiérarchisée",
+   "rule_en": "Each page has a ranked heading structure",
+   "how": "live",
+   "a11y": {
+    "rgaa": [
+     "9.1"
+    ],
+    "wcag": [
+     "1.3.1",
+     "2.4.6"
+    ]
+   }
+  },
+  {
+   "id": 235,
+   "theme": 14,
+   "rule": "Les listes visuelles sont balisées comme des listes",
+   "rule_en": "Visual lists are marked up as lists",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "9.3"
+    ],
+    "wcag": [
+     "1.3.1"
+    ]
+   }
+  },
+  {
+   "id": 236,
+   "theme": 14,
+   "rule": "Chaque identifiant HTML est unique dans la page",
+   "rule_en": "Each HTML id is used once per page",
+   "how": "live",
+   "a11y": {
+    "rgaa": [
+     "8.2"
+    ],
+    "wcag": [
+     "4.1.1"
+    ]
+   }
+  },
+  {
+   "id": 237,
+   "theme": 14,
+   "rule": "La copie de contenu n'est pas bloquée",
+   "rule_en": "Copying content is not blocked",
+   "how": "code"
+  },
+  {
+   "id": 238,
+   "theme": 14,
+   "rule": "Le menu contextuel n'est pas bloqué",
+   "rule_en": "The context menu is not blocked",
+   "how": "code"
+  },
+  {
+   "id": 239,
+   "theme": 14,
+   "rule": "Aucune redirection ou actualisation n'est imposée côté client",
+   "rule_en": "No client-side redirect or refresh is forced",
+   "how": "live+code",
+   "a11y": {
+    "rgaa": [
+     "13.1"
+    ],
+    "wcag": [
+     "2.2.1",
+     "3.2.5"
+    ]
+   }
+  },
+  {
+   "id": 240,
+   "theme": 14,
+   "rule": "Le texte des PDF internes peut être sélectionné",
+   "rule_en": "Text in internal PDFs can be selected",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "13.3"
+    ],
+    "wcag": []
+   }
+  },
+  {
+   "id": 241,
+   "theme": 14,
+   "rule": "Les PDF internes ont des titres",
+   "rule_en": "Internal PDFs have headings",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "13.3"
+    ],
+    "wcag": []
+   }
+  },
+  {
+   "id": 242,
+   "theme": 14,
+   "rule": "Les cellules des tableaux de données sont reliées à leurs en-têtes",
+   "rule_en": "Data table cells are tied to their headers",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "5.6",
+     "5.7"
+    ],
+    "wcag": [
+     "1.3.1"
+    ]
+   }
+  },
+  {
+   "id": 243,
+   "theme": 14,
+   "rule": "Les tableaux de données ont un titre",
+   "rule_en": "Data tables have titles",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "5.4",
+     "5.5"
+    ],
+    "wcag": [
+     "1.3.1"
+    ]
+   }
+  },
+  {
+   "id": 244,
+   "theme": 14,
+   "rule": "Les tableaux de mise en forme restent compréhensibles une fois linéarisés",
+   "rule_en": "Layout tables still make sense when linearised",
+   "how": "code",
+   "a11y": {
+    "rgaa": [
+     "5.3",
+     "5.8"
+    ],
+    "wcag": [
+     "1.3.2"
+    ]
+   }
+  },
+  {
+   "id": 245,
+   "theme": 14,
+   "rule": "Les tableaux de données ne sont pas simulés",
+   "rule_en": "Data tables are not faked",
+   "how": "code"
+  },
+  {
+   "id": "V4-25",
+   "theme": 15,
+   "rule": "Les liens ouvrant une nouvelle fenêtre ne partagent pas de contexte (noopener)",
+   "rule_en": "External links opening a new window share no context (noopener)",
+   "how": "code"
+  },
+  {
+   "id": "V4-235",
+   "theme": 15,
+   "rule": "Les flux de syndication peuvent être découverts",
+   "rule_en": "Syndication feeds can be discovered",
+   "how": "code"
+  },
+  {
+   "id": "V4-239",
+   "theme": 15,
+   "rule": "Les tableaux de données ne sont pas remplacés par des images",
+   "rule_en": "Data tables are not replaced by images",
+   "how": "code"
+  }
+ ]
+}

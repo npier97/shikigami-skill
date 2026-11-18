@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="__LANG__">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>__TITLE__</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap">
+<style>
+/* Mise en page : un rapport d'inspection. Verdict, accessibilité, évolutions, plan d'action, puis le registre filtrable. */
+:root {
+  --bg: #f6f7fb; --surface: #ffffff; --fg: #141a2b; --muted: #556079; --line: #dfe3ee;
+  --accent: #3b55d9; --accent-soft: #e8ecff;
+  --pass: #17794a; --pass-bg: #e3f5ea; --partial: #8a5a00; --partial-bg: #fff2d6;
+  --fail: #b42318; --fail-bg: #fde7e5; --na: #5b6478; --na-bg: #eef0f5; --check: #5a3fb5; --check-bg: #efe9ff;
+  --display: "Space Grotesk", "IBM Plex Sans", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0d1220; --surface: #151c2e; --fg: #e8ecf6; --muted: #9aa5bf; --line: #27304a;
+  --accent: #8ea2ff; --accent-soft: #1e2850;
+  --pass: #6fd69e; --pass-bg: #12301f; --partial: #f3c160; --partial-bg: #33270b; --fail: #ff8f85; --fail-bg: #3a1714;
+  --na: #a3abbf; --na-bg: #1f2638; --check: #c2b0ff; --check-bg: #2a2150; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0d1220; --surface: #151c2e; --fg: #e8ecf6; --muted: #9aa5bf; --line: #27304a;
+  --accent: #8ea2ff; --accent-soft: #1e2850;
+  --pass: #6fd69e; --pass-bg: #12301f; --partial: #f3c160; --partial-bg: #33270b; --fail: #ff8f85; --fail-bg: #3a1714;
+  --na: #a3abbf; --na-bg: #1f2638; --check: #c2b0ff; --check-bg: #2a2150; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.55 var(--body); }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-block: 40px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 36px; }
+h1, h2 { font-family: var(--display); text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+h1 { font-size: clamp(28px, 4vw, 40px); line-height: 1.1; }
+h2 { font-size: 22px; }
+p { margin: 0; }
+.eyebrow { font: 500 12px/1 var(--mono); text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); }
+.lede { color: var(--muted); max-width: 68ch; }
+header { display: grid; gap: 12px; }
+.brandrow { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; }
+.brand { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.brand img { height: 32px; width: auto; max-width: 180px; object-fit: contain; display: block; }
+.logo-dark { display: none !important; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .has-dark .logo-light { display: none !important; } :root:not([data-theme="light"]) .has-dark .logo-dark { display: block !important; } }
+:root[data-theme="dark"] .has-dark .logo-light { display: none !important; }
+:root[data-theme="dark"] .has-dark .logo-dark { display: block !important; }
+.btn { font: 500 13px/1 var(--body); color: var(--accent); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 9px 12px; min-height: 36px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+.btn:hover { border-color: var(--accent); }
+.btn svg { width: 15px; height: 15px; flex: none; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 20px; font: 13px var(--mono); color: var(--muted); }
+.strip { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+.strip.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.tile { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: grid; gap: 2px; cursor: pointer; text-align: left; font: inherit; color: inherit; }
+div.tile { cursor: default; }
+button.tile:hover { border-color: var(--accent); }
+.tile[aria-pressed="true"] { outline: 2px solid var(--accent); outline-offset: -1px; }
+.tile b { font: 600 28px/1.1 var(--display); font-variant-numeric: tabular-nums; }
+.tile span { font-size: 13px; color: var(--muted); }
+.tile.pass b, .tile.fixed b { color: var(--pass); } .tile.partial b, .tile.improved b { color: var(--partial); } .tile.fail b, .tile.regressed b { color: var(--fail); } .tile.check b { color: var(--check); } .tile.na b, .tile.open b { color: var(--na); }
+.bar { display: flex; height: 8px; border-radius: 4px; overflow: hidden; background: var(--line); }
+.bar i { display: block; height: 100%; }
+.note { font-size: 13.5px; color: var(--muted); max-width: 80ch; }
+section { display: grid; gap: 14px; }
+.changes { list-style: none; margin: 0; padding: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+.changes li { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 6px 14px; align-items: center; padding: 10px 14px; border-top: 1px solid var(--line); font-size: 14px; }
+.changes li:first-child { border-top: 0; }
+.changes .num { font: 500 13px var(--mono); color: var(--muted); }
+.changes .move { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.changes .arrow { color: var(--muted); font-family: var(--mono); }
+.plan { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.plan li { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--sev); border-radius: 8px; padding: 14px 16px; display: grid; gap: 6px; }
+.plan li.critical { --sev: var(--fail); } .plan li.high { --sev: var(--partial); } .plan li.medium { --sev: var(--accent); } .plan li.low { --sev: var(--na); }
+.plan li.done { --sev: var(--pass); }
+.plan li.done h3 { text-decoration: line-through; text-decoration-color: var(--muted); color: var(--muted); }
+.plan .top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; }
+.plan h3 { margin: 0; font: 600 16px/1.3 var(--body); }
+.plan .rules { font: 12.5px var(--mono); color: var(--muted); }
+.plan p { font-size: 14px; color: var(--muted); max-width: 90ch; }
+.plan code, td code, .changes code, footer code, dialog code { font: 12.5px var(--mono); background: var(--accent-soft); padding: 1px 5px; border-radius: 4px; overflow-wrap: anywhere; }
+.sev { font: 500 11px/1 var(--mono); text-transform: uppercase; letter-spacing: 0.06em; padding: 4px 7px; border-radius: 4px; }
+.sev.critical { color: var(--fail); background: var(--fail-bg); } .sev.high { color: var(--partial); background: var(--partial-bg); }
+.sev.medium { color: var(--accent); background: var(--accent-soft); } .sev.low { color: var(--na); background: var(--na-bg); }
+.sev.done { color: var(--pass); background: var(--pass-bg); }
+details.done-list > summary { cursor: pointer; font-size: 14px; color: var(--muted); padding: 6px 0; }
+details.done-list[open] > summary { margin-bottom: 10px; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.controls input, .controls select { font: inherit; font-size: 14px; color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; min-height: 38px; }
+.controls input { flex: 1 1 240px; min-width: 0; }
+.controls label { font-size: 13px; color: var(--muted); display: flex; gap: 8px; align-items: center; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.count { font: 13px var(--mono); color: var(--muted); }
+.table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 760px; }
+caption { text-align: left; padding: 12px 14px; font-size: 13px; color: var(--muted); }
+th, td { text-align: left; vertical-align: top; padding: 10px 14px; border-top: 1px solid var(--line); }
+thead th { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); background: var(--bg); border-top: 0; position: sticky; top: 0; }
+td.num { font: 500 13px var(--mono); white-space: nowrap; color: var(--muted); }
+td.rule { width: 28%; } td.st { width: 118px; } td.find { color: var(--fg); }
+td .fix { display: block; margin-top: 6px; color: var(--muted); }
+td .fix::before { content: var(--fix-label, "Fix: "); font-weight: 600; color: var(--fg); }
+.cat-row th { background: var(--accent-soft); color: var(--fg); font: 600 13px var(--body); text-transform: none; letter-spacing: 0; position: static; }
+.pill { display: inline-flex; align-items: center; gap: 6px; font: 500 12px/1 var(--body); padding: 5px 8px; border-radius: 999px; white-space: nowrap; }
+.pill::before { font-family: var(--mono); font-weight: 600; }
+.pill.pass { color: var(--pass); background: var(--pass-bg); } .pill.pass::before { content: "✓"; }
+.pill.partial { color: var(--partial); background: var(--partial-bg); } .pill.partial::before { content: "~"; }
+.pill.fail { color: var(--fail); background: var(--fail-bg); } .pill.fail::before { content: "✕"; }
+.pill.na { color: var(--na); background: var(--na-bg); } .pill.na::before { content: "–"; }
+.pill.check { color: var(--check); background: var(--check-bg); } .pill.check::before { content: "?"; }
+.was { display: block; margin-top: 6px; font: 11px var(--mono); color: var(--muted); white-space: nowrap; }
+.was s { text-decoration-thickness: 1px; }
+.refs { font: 11px var(--mono); color: var(--muted); display: block; margin-top: 4px; }
+td .impact { display: block; margin-top: 6px; color: var(--muted); }
+td .impact b { color: var(--fg); font-weight: 600; }
+.effort { font: 12px var(--mono); color: var(--muted); }
+.jira-row { display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: center; font-size: 13px; color: var(--muted); }
+a.jira { font: 500 12px/1 var(--mono); color: var(--accent); background: var(--accent-soft); padding: 5px 7px; border-radius: 4px; text-decoration: none; }
+a.jira:hover { text-decoration: underline; }
+a.jira::after { content: " ↗"; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+.a11y-box { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: grid; gap: 12px; }
+.a11y-counts { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.disclaimer { font-size: 13.5px; color: var(--fg); background: var(--check-bg); border-radius: 8px; padding: 10px 12px; max-width: 90ch; }
+footer { font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 18px; display: grid; gap: 6px; }
+footer details summary { cursor: pointer; }
+footer table { min-width: 0; font-size: 13px; margin-top: 8px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+footer td, footer th { padding: 6px 10px; }
+footer td { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.auditor { display: flex; align-items: center; gap: 10px; margin-top: 6px; }
+.auditor img { height: 22px; width: auto; max-width: 140px; object-fit: contain; }
+a { color: var(--accent); }
+dialog { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--fg); padding: 0; width: min(520px, calc(100vw - 32px)); }
+dialog::backdrop { background: rgb(13 18 32 / 0.45); }
+.dlg { display: grid; gap: 14px; padding: 20px; }
+.dlg-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.dlg-head h2 { font-size: 19px; }
+.dlg p { font-size: 14px; color: var(--muted); }
+.dlg dl { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; margin: 0; font-size: 13.5px; }
+.dlg dt { color: var(--muted); } .dlg dd { margin: 0; font-family: var(--mono); overflow-wrap: anywhere; }
+.cmd { display: flex; gap: 8px; align-items: stretch; }
+.cmd code { flex: 1; display: flex; align-items: center; font-size: 14px !important; padding: 8px 10px !important; }
+.iconbtn { background: none; border: 0; color: var(--muted); cursor: pointer; padding: 6px; border-radius: 6px; font: 20px/1 var(--body); min-width: 32px; min-height: 32px; }
+.iconbtn:hover { color: var(--fg); background: var(--bg); }
+@media (max-width: 720px) { .strip { grid-template-columns: repeat(2, minmax(0, 1fr)); } .strip:not(.four) .tile:first-child { grid-column: span 2; } .changes li { grid-template-columns: 52px minmax(0, 1fr); } .changes .move { grid-column: 2; justify-content: flex-start; } }
+@media (prefers-reduced-motion: no-preference) { .tile, .btn { transition: border-color .15s; } }
+@media print { .btn, .controls, dialog { display: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brandrow">
+      <div class="brand" id="brand"></div>
+      <button class="btn" id="refreshBtn" type="button" aria-haspopup="dialog">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9"/><path d="M13.5 2.5v3h-3"/></svg>
+        <span data-t="refresh"></span>
+      </button>
+    </div>
+    <p class="eyebrow" id="eyebrow"></p>
+    <h1 id="title"></h1>
+    <p class="lede" id="lede"></p>
+    <div class="meta" id="meta"></div>
+  </header>
+
+  <section aria-labelledby="verdict">
+    <h2 id="verdict" data-t="verdict"></h2>
+    <div class="strip" id="tiles"></div>
+    <div class="bar" id="bar" aria-hidden="true"></div>
+    <p class="note" id="verdictNote"></p>
+  </section>
+
+  <section aria-labelledby="a11y" id="a11ySection" hidden>
+    <h2 id="a11y" data-t="a11yTitle"></h2>
+    <div class="a11y-box">
+      <p class="note" id="a11yNote"></p>
+      <div class="a11y-counts" id="a11yCounts"></div>
+      <p class="disclaimer" data-t="a11yDisclaimer"></p>
+      <div><button class="btn" type="button" id="a11yBtn" data-t="a11yShow"></button></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="since" id="sinceSection" hidden>
+    <h2 id="since" data-t="since"></h2>
+    <div class="strip four" id="deltaTiles"></div>
+    <p class="note" id="sinceNote"></p>
+    <ul class="changes" id="changes"></ul>
+  </section>
+
+  <section aria-labelledby="plan">
+    <h2 id="plan" data-t="plan"></h2>
+    <ol class="plan" id="planList"></ol>
+    <details class="done-list" id="doneWrap" hidden>
+      <summary id="doneSummary"></summary>
+      <ol class="plan" id="doneList"></ol>
+    </details>
+  </section>
+
+  <section aria-labelledby="register">
+    <h2 id="register" data-t="register"></h2>
+    <div class="controls">
+      <input id="q" type="search" aria-label="">
+      <label for="cat"><span data-t="theme"></span> <select id="cat"></select></label>
+      <label for="st"><span data-t="status"></span> <select id="st"></select></label>
+      <span class="count" id="count" aria-live="polite"></span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <caption data-t="caption"></caption>
+        <thead><tr><th scope="col">#</th><th scope="col" data-t="colRule"></th><th scope="col" data-t="colStatus"></th><th scope="col" id="colFinding"></th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer id="footer"></footer>
+</div>
+
+<dialog id="refreshDlg" aria-labelledby="dlgTitle">
+  <div class="dlg">
+    <div class="dlg-head"><h2 id="dlgTitle" data-t="refreshTitle"></h2><button class="iconbtn" type="button" id="dlgClose">×</button></div>
+    <p data-t="refreshBody"></p>
+    <dl id="dlgMeta"></dl>
+    <div class="cmd"><code id="cmd">/shikigami-audit-web refresh</code><button class="btn" type="button" id="copyBtn" data-t="copy"></button></div>
+    <p data-t="refreshAfter"></p>
+    <span class="count" id="copyStatus" role="status"></span>
+  </div>
+</dialog>
+
+<script type="application/json" id="audit-data">__AUDIT_DATA__</script>
+<script>
+const D = JSON.parse(document.getElementById("audit-data").textContent);
+const OPQ = `<a href="https://checklists.opquast.com/" rel="noopener">opquast.com</a>`;
+const STRINGS = {
+  fr: {
+    refresh: "Relancer l'audit", verdict: "Verdict", since: "Depuis le dernier passage", plan: "Plan d'action, par priorité", register: "Registre des règles Opquast",
+    theme: "Thème", status: "Statut", colRule: "Règle Opquast (reformulée)", colStatus: "Statut", colFinding: p => `Ce que fait ${p} aujourd'hui`,
+    caption: "Les intitulés sont des reformulations courtes des règles Opquast ; le libellé officiel figure dans la checklist Opquast. Les références RGAA et WCAG sous une règle sont des correspondances indicatives.",
+    search: "Rechercher une règle, un constat, un correctif, un critère…", allThemes: "Tous les thèmes", a11yFilter: "Accessibilité (RGAA / WCAG)", allStatuses: "Tous les statuts", todo: "Non conformes + partielles", changed: "Modifiées depuis le dernier passage",
+    eyebrow: "Audit qualité web · Référentiel Opquast V5 (2025)", h1: p => `${p} au regard des règles Opquast`,
+    audited: d => `Audité le ${d}`, liveSite: s => `Site en ligne : ${s}`, code: (b, c) => `Code : ${b ? "branche " + b : ""}${b && c ? " @ " : ""}${c || ""}`, run: n => `Passage ${n}`,
+    applies: (n, r) => `règles Opquast applicables sur ${n}${r !== null ? ` · ${r} % conformes` : ""}`, checkOutside: "à vérifier hors du dépôt",
+    tile: {pass: "conformes", partial: "partielles", fail: "non conformes"},
+    fixed: "corrigées", improved: "améliorées", regressed: "en régression", open: "restent à corriger (non conformes + partielles)",
+    sinceNote: (a, b) => `Comparaison avec le passage du ${a}. ${b}`, noChange: "Aucune règle n'a changé de statut.",
+    jira: "Jira :", jiraEpic: "Epic Jira de l'audit :", newTab: "(nouvel onglet)", rules: "Règles", done: n => `Terminé (${n})`, doneTag: "terminé", was: "avant :", fix: "Correctif : ", impact: "Impact : ", effort: e => `Effort : ${e}`,
+    SEV: {critical: "Bloquant", high: "Élevé", medium: "Moyen", low: "Faible"}, EFFORT: {simple: "simple", moderate: "modéré", complex: "complexe"},
+    count: (a, b) => `${a} règles sur ${b}`, noMatch: "Aucune règle ne correspond à ces filtres.",
+    a11yTitle: "Accessibilité (RGAA / WCAG)",
+    a11yNote: n => `${n} règles Opquast applicables recoupent des critères du RGAA 4.1.2 et des WCAG 2.2. Leur résultat donne une première lecture de l'accessibilité du site :`,
+    a11yDisclaimer: "Ce rapport n'est pas un audit de conformité RGAA et ne donne pas de taux de conformité RGAA. Il est produit par analyse du code et du site en ligne, assistée par IA. Les points d'accessibilité doivent être vérifiés par un auditeur humain, avec des technologies d'assistance.",
+    a11yShow: "Voir ces règles dans le registre",
+    refreshTitle: "Relancer cet audit",
+    refreshBody: "L'audit s'exécute dans Claude Code, sur le dépôt et sur le site en ligne : cette page ne peut pas lire le code elle-même. Pour le relancer, ouvrez Claude Code dans le dépôt du client et lancez :",
+    refreshAfter: "Claude revérifie chaque règle non conforme, partielle ou à vérifier, reteste le site en ligne et met à jour cette page à la même adresse. Les évolutions apparaissent ensuite sous « Depuis le dernier passage ».",
+    lastRun: "Dernier passage", commit: "Commit", branch: "Branche", copy: "Copier", copied: "Commande copiée.", copyFail: "Copie impossible : sélectionnez la commande et copiez-la.",
+    close: "Fermer", history: "Historique des passages", hDate: "Date", hCommit: "Commit", hRate: "% conformes", auditedBy: "Audit réalisé par",
+    source: `Référentiel : règles Opquast, version 5 (2025–2030), licence Creative Commons BY-SA, ${OPQ}. Numérotation V4 issue de la checklist communautaire Notion (240 règles). Correspondances accessibilité : <a href="https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/" rel="noopener">RGAA 4.1.2</a> et <a href="https://www.w3.org/TR/WCAG22/" rel="noopener">WCAG 2.2</a>.`,
+    disclaimerFoot: "Audit produit par analyse statique du code et tests du site en ligne, assistés par IA. Les contrôles d'accessibilité (contrastes, clavier, lecteurs d'écran) sont échantillonnés et doivent être confirmés par un auditeur humain.",
+    correction: d => `Correction du ${d} : `,
+    themes: {1:"Contenus",2:"Données personnelles",3:"E-commerce",4:"Formulaires",5:"Identification et contact",6:"Images et médias",7:"Internationalisation",8:"Liens",9:"Navigation",10:"Lettre d'information",11:"Présentation",12:"Sécurité",13:"Serveur et performances",14:"Structure et code",15:"Règles V4 retirées en V5"},
+    LABEL: {pass:"Conforme", partial:"Partiel", fail:"Non conforme", check:"À vérifier", na:"Non applicable"},
+    locale: "fr-FR"
+  },
+  en: {
+    refresh: "Refresh audit", verdict: "Verdict", since: "Since the last run", plan: "Action plan, by priority", register: "Opquast rule register",
+    theme: "Theme", status: "Status", colRule: "Opquast rule (paraphrased)", colStatus: "Status", colFinding: p => `What ${p} does today`,
+    caption: "Rule titles are short paraphrases of the Opquast rules; the official wording is in the Opquast checklist. RGAA and WCAG references under a rule are indicative mappings.",
+    search: "Search rules, findings, fixes, criteria…", allThemes: "All themes", a11yFilter: "Accessibility (RGAA / WCAG)", allStatuses: "All statuses", todo: "Fail + Partial", changed: "Changed since last run",
+    eyebrow: "Web quality audit · Opquast V5 rules (2025)", h1: p => `${p} against the Opquast rules`,
+    audited: d => `Audited ${d}`, liveSite: s => `Live site: ${s}`, code: (b, c) => `Code: ${b ? "branch " + b : ""}${b && c ? " @ " : ""}${c || ""}`, run: n => `Run ${n}`,
+    applies: (n, r) => `Opquast rules apply, of ${n}${r !== null ? ` · ${r}% pass` : ""}`, checkOutside: "to check outside the repo",
+    tile: {pass: "pass", partial: "partial", fail: "fail"},
+    fixed: "fixed", improved: "improved", regressed: "regressed", open: "still to fix (fail + partial)",
+    sinceNote: (a, b) => `Compared with the run of ${a}. ${b}`, noChange: "No rule changed status.",
+    jira: "Jira:", jiraEpic: "Jira epic for this audit:", newTab: "(opens in a new tab)", rules: "Rules", done: n => `Done (${n})`, doneTag: "done", was: "was", fix: "Fix: ", impact: "Impact: ", effort: e => `Effort: ${e}`,
+    SEV: {critical: "Critical", high: "High", medium: "Medium", low: "Low"}, EFFORT: {simple: "simple", moderate: "moderate", complex: "complex"},
+    count: (a, b) => `${a} of ${b} rules`, noMatch: "No rule matches these filters.",
+    a11yTitle: "Accessibility (RGAA / WCAG)",
+    a11yNote: n => `${n} applicable Opquast rules overlap with RGAA 4.1.2 criteria and WCAG 2.2 success criteria. Their results give a first reading of the site's accessibility:`,
+    a11yDisclaimer: "This report is not an RGAA conformance audit and gives no RGAA conformance rate. It comes from AI-assisted analysis of the code and the live site. Accessibility points must be verified by a human auditor using assistive technologies.",
+    a11yShow: "Show these rules in the register",
+    refreshTitle: "Refresh this audit",
+    refreshBody: "The audit runs in Claude Code, on the repository and the live site. This page cannot read the code itself. To re-run it, open Claude Code in the client repository and run:",
+    refreshAfter: "Claude re-checks every failed, partial and to-check rule, re-tests the live site, and updates this page at the same link. Changes then appear under “Since the last run”.",
+    lastRun: "Last run", commit: "Commit", branch: "Branch", copy: "Copy", copied: "Copied to the clipboard.", copyFail: "Copy failed: select the command and copy it.",
+    close: "Close", history: "Run history", hDate: "Date", hCommit: "Commit", hRate: "% pass", auditedBy: "Audited by",
+    source: `Standard: Opquast rules, version 5 (2025–2030), Creative Commons BY-SA, ${OPQ}. V4 numbering from the community Notion checklist (240 rules). Accessibility mappings: <a href="https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/" rel="noopener">RGAA 4.1.2</a> and <a href="https://www.w3.org/TR/WCAG22/" rel="noopener">WCAG 2.2</a>.`,
+    disclaimerFoot: "AI-assisted audit from static analysis of the code and tests of the live site. Accessibility checks (contrast, keyboard, screen readers) are sampled and must be confirmed by a human auditor.",
+    correction: d => `Correction, ${d}: `,
+    themes: {1:"Content",2:"Personal data",3:"E-commerce",4:"Forms",5:"Identification and contact",6:"Images and media",7:"Internationalisation",8:"Links",9:"Navigation",10:"Newsletter",11:"Presentation",12:"Security",13:"Server and performance",14:"Structure and code",15:"V4 rules dropped in V5"},
+    LABEL: {pass:"Pass", partial:"Partial", fail:"Fail", check:"Check", na:"N/A"},
+    locale: "en-GB"
+  }
+};
+const T = STRINGS[D.lang] || STRINGS.fr;
+const LABEL = T.LABEL;
+const P = D.product || D.client || "Ce site";
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const AUTO = /(https?:\/\/[^\s,)]+|\b[\w.-]+\.(?:tsx?|jsx?|mjs|jsonc?|css|scss|html|php|py|rb|go|vue|svelte|toml|ya?ml)\b|&lt;[^&]+&gt;|\/api\/\S*)/g;
+const fmt = s => String(s ?? "").split("`").map((part, i) => i % 2 ? `<code>${esc(part)}</code>` : esc(part).replace(AUTO, m => `<code>${m}</code>`)).join("");
+const fmtDate = iso => { if (!iso) return ""; const d = new Date(iso + (iso.length === 10 ? "T12:00:00" : "")); return isNaN(d) ? iso : d.toLocaleDateString(T.locale, {day: "numeric", month: "short", year: "numeric"}); };
+const short = c => c ? String(c).slice(0, 7) : "";
+const rate = c => { const n = c.pass + c.partial + c.fail; return n ? Math.round(c.pass / n * 100) : null; };
+const rulesLabel = ids => {
+  const out = []; let i = 0;
+  while (i < ids.length) {
+    let j = i;
+    while (typeof ids[j] === "number" && ids[j + 1] === ids[j] + 1) j++;
+    out.push(j - i >= 2 ? `${ids[i]}–${ids[j]}` : ids.slice(i, j + 1).join(" · ")); i = j + 1;
+  }
+  return out.join(" · ");
+};
+const refsText = a => a ? [a.rgaa?.length && `RGAA ${a.rgaa.join(", ")}`, a.wcag?.length && `WCAG ${a.wcag.join(", ")}`].filter(Boolean).join(" · ") : "";
+document.querySelectorAll("[data-t]").forEach(el => { const v = T[el.dataset.t]; if (typeof v === "string") el.textContent = v; });
+document.documentElement.style.setProperty("--fix-label", JSON.stringify(T.fix));
+document.getElementById("colFinding").textContent = T.colFinding(P);
+document.getElementById("dlgClose").setAttribute("aria-label", T.close);
+
+/* En-tête */
+const brand = document.getElementById("brand");
+if (D.logo) {
+  brand.classList.toggle("has-dark", !!D.logoDark);
+  brand.insertAdjacentHTML("beforeend", `<img class="logo-light" src="${esc(D.logo)}" alt="${esc(D.client || P)}">` + (D.logoDark ? `<img class="logo-dark" src="${esc(D.logoDark)}" alt="${esc(D.client || P)}">` : ""));
+}
+document.getElementById("eyebrow").textContent = D.meta.eyebrow || T.eyebrow;
+document.getElementById("title").textContent = D.meta.title || T.h1(P);
+document.getElementById("lede").innerHTML = fmt(D.meta.lede);
+document.getElementById("verdictNote").innerHTML = fmt(D.meta.verdict);
+const RUNS = D.runs || [];
+const cur = RUNS[RUNS.length - 1] || {}, prev = RUNS.length > 1 ? RUNS[RUNS.length - 2] : null;
+document.getElementById("meta").innerHTML = [
+  cur.date && T.audited(fmtDate(cur.date)), RUNS.length > 1 && T.run(RUNS.length),
+  D.site && T.liveSite(D.site.replace(/^https?:\/\//, "").replace(/\/$/, "")),
+  (cur.branch || cur.commit) && T.code(cur.branch, short(cur.commit))
+].filter(Boolean).map(s => `<span>${esc(s)}</span>`).join("");
+
+/* Règles */
+const R = D.rules; // {id, theme, rule, status, finding, fix, impact, a11y, history}
+R.forEach(r => { r.refs = refsText(r.a11y); });
+const v5 = R.filter(r => typeof r.id === "number");
+const countOf = list => { const c = {pass:0, partial:0, fail:0, check:0, na:0}; list.forEach(r => c[r.status]++); return c; };
+const counts = countOf(v5);
+const applicable = v5.length - counts.na;
+
+/* Évolutions depuis le passage précédent */
+const RANK = {fail:0, partial:1, check:1, pass:2};
+R.forEach(r => {
+  r.prev = null; r.delta = null;
+  if (!prev) return;
+  const h = (r.history || []).find(x => x.run === prev.id);
+  if (!h || h.status === r.status) return;
+  r.prev = h.status;
+  const a = RANK[h.status], b = RANK[r.status];
+  r.delta = a === undefined || b === undefined ? "changed" : b < a ? "regressed" : r.status === "pass" ? "fixed" : b > a ? "improved" : "changed";
+});
+const changed = R.filter(r => r.prev);
+if (prev) {
+  const n = k => changed.filter(r => r.delta === k).length;
+  document.getElementById("sinceSection").hidden = false;
+  document.getElementById("deltaTiles").innerHTML = [["fixed", n("fixed")], ["improved", n("improved")], ["regressed", n("regressed")], ["open", counts.fail + counts.partial]]
+    .map(([k, v]) => `<div class="tile ${k}"><b>${v}</b><span>${esc(T[k])}</span></div>`).join("");
+  document.getElementById("sinceNote").textContent = T.sinceNote(fmtDate(prev.date) + (prev.commit ? ` (${short(prev.commit)})` : ""), changed.length ? "" : T.noChange);
+  const order = {regressed:0, fixed:1, improved:2, changed:3};
+  document.getElementById("changes").innerHTML = changed.sort((a, b) => order[a.delta] - order[b.delta]).map(r =>
+    `<li><span class="num">${esc(r.id)}</span><span>${esc(r.rule)}${r.refs ? `<span class="refs">${esc(r.refs)}</span>` : ""}</span><span class="move"><span class="pill ${esc(r.prev)}">${esc(LABEL[r.prev])}</span><span class="arrow" aria-hidden="true">→</span><span class="pill ${esc(r.status)}">${esc(LABEL[r.status])}</span></span></li>`).join("");
+  document.getElementById("changes").hidden = !changed.length;
+}
+
+/* Tuiles du verdict */
+const tiles = document.getElementById("tiles");
+[["all", `${applicable}`, T.applies(v5.length, rate(counts))], ["pass", counts.pass, T.tile.pass], ["partial", counts.partial, T.tile.partial], ["fail", counts.fail, T.tile.fail], ["check", counts.check, T.checkOutside]].forEach(([k, n, label]) => {
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "tile " + k; b.dataset.k = k; b.setAttribute("aria-pressed", "false");
+  b.innerHTML = `<b>${n}</b><span>${esc(label)}</span>`;
+  b.addEventListener("click", () => { st.value = k === "all" ? "" : k; render(); jump(); });
+  tiles.appendChild(b);
+});
+const bar = document.getElementById("bar");
+[["pass","--pass"],["partial","--partial"],["check","--check"],["fail","--fail"]].forEach(([k, v]) => { const i = document.createElement("i"); i.style.width = (applicable ? counts[k] / applicable * 100 : 0) + "%"; i.style.background = `var(${v})`; bar.appendChild(i); });
+const jump = () => document.getElementById("register").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"});
+
+/* Accessibilité */
+const A11Y = v5.filter(r => r.a11y && r.status !== "na");
+if (A11Y.length) {
+  const c = countOf(A11Y);
+  document.getElementById("a11ySection").hidden = false;
+  document.getElementById("a11yNote").textContent = T.a11yNote(A11Y.length);
+  document.getElementById("a11yCounts").innerHTML = ["pass", "partial", "fail", "check"].filter(k => c[k]).map(k => `<span class="pill ${k}">${c[k]} ${esc(k === "check" ? LABEL.check.toLowerCase() : T.tile[k])}</span>`).join("");
+  document.getElementById("a11yBtn").addEventListener("click", () => { cat.value = "a11y"; st.value = ""; render(); jump(); });
+}
+
+/* Plan d'action */
+const planItem = p => {
+  const done = p.state === "done", sev = done ? "done" : esc(p.severity);
+  const effort = p.effort && T.EFFORT[p.effort] ? `<span class="effort">${esc(T.effort(T.EFFORT[p.effort]))}</span>` : "";
+  const jira = (p.jira || []).filter(t => t && t.key && /^https:\/\//.test(t.url || "")).map(t => `<a class="jira" href="${esc(t.url)}" target="_blank" rel="noopener noreferrer">${esc(t.key)}${t.type ? ` · ${esc(t.type)}` : ""}<span class="visually-hidden"> ${esc(T.newTab)}</span></a>`).join("");
+  return `<li class="${sev}"><div class="top"><span class="sev ${sev}">${esc(done ? T.doneTag : T.SEV[p.severity] || p.severity)}</span><h3>${esc(p.title)}</h3><span class="rules">${esc(T.rules)} ${esc(rulesLabel(p.rules || []))}</span>${effort}</div><p>${fmt(p.body)}</p>${jira ? `<div class="jira-row">${esc(T.jira)} ${jira}</div>` : ""}</li>`;
+};
+if (D.jiraEpic && D.jiraEpic.key && /^https:\/\//.test(D.jiraEpic.url || "")) {
+  document.getElementById("planList").insertAdjacentHTML("beforebegin", `<p class="note">${esc(T.jiraEpic)} <a class="jira" href="${esc(D.jiraEpic.url)}" target="_blank" rel="noopener noreferrer">${esc(D.jiraEpic.key)}<span class="visually-hidden"> ${esc(T.newTab)}</span></a></p>`);
+}
+const SEV = {critical:0, high:1, medium:2, low:3};
+const openPlan = (D.plan || []).filter(p => p.state !== "done").sort((a, b) => SEV[a.severity] - SEV[b.severity]);
+const donePlan = (D.plan || []).filter(p => p.state === "done");
+document.getElementById("planList").innerHTML = openPlan.map(planItem).join("");
+if (donePlan.length) { document.getElementById("doneWrap").hidden = false; document.getElementById("doneSummary").textContent = T.done(donePlan.length); document.getElementById("doneList").innerHTML = donePlan.map(planItem).join(""); }
+
+/* Registre */
+const cat = document.getElementById("cat"), st = document.getElementById("st"), q = document.getElementById("q");
+q.placeholder = T.search; q.setAttribute("aria-label", T.search);
+const themeName = k => `${k < 15 ? k + " · " : ""}${T.themes[k] || (D.themes && D.themes[k]) || k}`;
+cat.innerHTML = `<option value="">${esc(T.allThemes)}</option>` + (R.some(r => r.a11y) ? `<option value="a11y">${esc(T.a11yFilter)}</option>` : "")
+  + [...new Set(R.map(r => r.theme))].sort((a, b) => a - b).map(k => `<option value="${esc(k)}">${esc(themeName(k))}</option>`).join("");
+st.innerHTML = `<option value="">${esc(T.allStatuses)}</option>` + ["fail","partial","check","pass","na"].map(k => `<option value="${k}">${esc(LABEL[k])}</option>`).join("")
+  + `<option value="todo">${esc(T.todo)}</option>` + (prev ? `<option value="changed">${esc(T.changed)}</option>` : "");
+const KEY = "audit-web-filters-" + String(D.client + "-" + P).toLowerCase().replace(/[^a-z0-9]+/g, "-");
+try { const saved = JSON.parse(localStorage.getItem(KEY) || "{}"); if (saved.cat && [...cat.options].some(o => o.value === saved.cat)) cat.value = saved.cat; if (saved.st && [...st.options].some(o => o.value === saved.st)) st.value = saved.st; } catch (e) {}
+
+function render() {
+  const term = q.value.trim().toLowerCase(), c = cat.value, s = st.value;
+  try { localStorage.setItem(KEY, JSON.stringify({cat: c, st: s})); } catch (e) {}
+  document.querySelectorAll("#tiles .tile").forEach(t => t.setAttribute("aria-pressed", String((t.dataset.k === "all" && !s) || t.dataset.k === s)));
+  let html = "", shown = 0, lastCat = null;
+  R.forEach(r => {
+    const k = r.theme;
+    if (c === "a11y" ? !r.a11y : c && String(k) !== c) return;
+    if (s === "todo" ? !(r.status === "fail" || r.status === "partial") : s === "changed" ? !r.prev : s && r.status !== s) return;
+    if (term && !(String(r.id) + " " + r.rule + " " + r.finding + " " + (r.fix || "") + " " + (r.impact || "") + " " + r.refs).toLowerCase().includes(term)) return;
+    if (k !== lastCat) { html += `<tr class="cat-row"><th colspan="4" scope="colgroup">${esc(themeName(k))}</th></tr>`; lastCat = k; }
+    shown++;
+    const was = r.prev ? `<span class="was">${esc(T.was)} <s>${esc(LABEL[r.prev])}</s></span>` : "";
+    const impact = r.impact ? `<span class="impact"><b>${esc(T.impact)}</b>${fmt(r.impact)}</span>` : "";
+    html += `<tr><td class="num">${esc(r.id)}</td><td class="rule">${esc(r.rule)}${r.refs ? `<span class="refs">${esc(r.refs)}</span>` : ""}</td><td class="st"><span class="pill ${esc(r.status)}">${esc(LABEL[r.status])}</span>${was}</td><td class="find">${fmt(r.finding)}${impact}${r.fix ? `<span class="fix">${fmt(r.fix)}</span>` : ""}</td></tr>`;
+  });
+  document.getElementById("rows").innerHTML = html || `<tr><td colspan="4">${esc(T.noMatch)}</td></tr>`;
+  document.getElementById("count").textContent = T.count(shown, R.length);
+}
+[q, cat, st].forEach(el => el.addEventListener("input", render));
+render();
+
+/* Pied de page */
+const foot = [`<p>${T.source}</p>`];
+if (D.meta.method) foot.push(`<p>${fmt(D.meta.method)}</p>`);
+foot.push(`<p>${esc(T.disclaimerFoot)}</p>`);
+(D.corrections || []).forEach(x => foot.push(`<p>${esc(T.correction(fmtDate(x.date)))}${fmt(x.text)}</p>`));
+if (RUNS.length) foot.push(`<details><summary>${esc(T.history)} (${RUNS.length})</summary><div class="table-wrap" style="border:0;background:none"><table><thead><tr><th scope="col">#</th><th scope="col">${esc(T.hDate)}</th><th scope="col">${esc(T.hCommit)}</th><th scope="col">${esc(LABEL.pass)}</th><th scope="col">${esc(LABEL.partial)}</th><th scope="col">${esc(LABEL.fail)}</th><th scope="col">${esc(LABEL.check)}</th><th scope="col">${esc(T.hRate)}</th></tr></thead><tbody>`
+  + RUNS.map((r, i) => `<tr><td>${i + 1}</td><td>${esc(fmtDate(r.date))}</td><td>${esc(short(r.commit) || "–")}</td><td>${r.counts?.pass ?? ""}</td><td>${r.counts?.partial ?? ""}</td><td>${r.counts?.fail ?? ""}</td><td>${r.counts?.check ?? ""}</td><td>${r.counts ? (rate(r.counts) ?? "–") : ""}</td></tr>`).join("")
+  + `</tbody></table></div></details>`);
+if (D.auditor && (D.auditor.name || D.auditor.logo)) {
+  const mark = D.auditor.logo ? `<img src="${esc(D.auditor.logo)}" alt="${esc(D.auditor.name || "")}">` : esc(D.auditor.name);
+  foot.push(`<div class="auditor"><span>${esc(T.auditedBy)}</span>${D.auditor.url ? `<a href="${esc(D.auditor.url)}" rel="noopener">${mark}</a>` : mark}</div>`);
+}
+document.getElementById("footer").innerHTML = foot.join("");
+
+/* Fenêtre « Relancer l'audit » */
+const dlg = document.getElementById("refreshDlg");
+document.getElementById("dlgMeta").innerHTML = [[T.lastRun, fmtDate(cur.date)], [T.branch, cur.branch], [T.commit, short(cur.commit)]].filter(x => x[1]).map(([a, b]) => `<dt>${esc(a)}</dt><dd>${esc(b)}</dd>`).join("");
+document.getElementById("refreshBtn").addEventListener("click", () => { document.getElementById("copyStatus").textContent = ""; dlg.showModal(); });
+document.getElementById("dlgClose").addEventListener("click", () => dlg.close());
+dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
+document.getElementById("copyBtn").addEventListener("click", async () => {
+  const out = document.getElementById("copyStatus");
+  try { await navigator.clipboard.writeText(document.getElementById("cmd").textContent); out.textContent = T.copied; }
+  catch (e) { const r = document.createRange(); r.selectNodeContents(document.getElementById("cmd")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); out.textContent = T.copyFail; }
+});
+</script>
+</body>
+</html>

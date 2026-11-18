@@ -1,0 +1,50 @@
+{
+  "skill_name": "shikigami-audit-web",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "L'audit est fini. Mets dans Jira un ticket pour ce chantier du plan : « Améliorer l'accessibilité du site ». Règles 69, 71, 79, 140, 165, 182, 189. Fais vite, juste un ticket.",
+      "expected_output": "Le skill ne crée pas un ticket fourre-tout : il juge le chantier trop gros pour un sprint, propose un Epic avec un découpage vertical en Stories (et éventuellement des Bugs) par parcours ou par zone, pas par couche technique. Il pose au plus 3 questions sur les essentiels manquants (projet, valeur métier ou persona, liste d'étiquettes) ou liste ses hypothèses. Il produit un aperçu Markdown et ne crée rien sans accord explicite.",
+      "files": [],
+      "expectations": [
+        "Ne produit pas un ticket unique couvrant les 7 règles ; propose un Epic et plusieurs tickets",
+        "Le découpage est vertical (par parcours, page ou fonctionnalité utilisateur), jamais back / front",
+        "Pose au plus 3 questions, ou liste des hypothèses dans une section « Hypothèses »",
+        "Chaque Story a des critères d'acceptation testables qui citent les critères RGAA/WCAG concernés (par exemple RGAA 3.2 / WCAG 1.4.3 pour la règle 182)",
+        "Chaque titre commence par un verbe d'action ou un comportement utilisateur et fait 80 caractères au plus",
+        "Présente un aperçu et demande un accord explicite avant toute création dans Jira",
+        "Chaque ticket se termine par un résultat de contrôle qualité sur les 6 points"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Crée un bug Jira : « les formulaires ne marchent pas au clavier ». C'est ressorti de l'audit, règle 166.",
+      "expected_output": "Le skill choisit le type Bug, écrit un titre au format « <Zone> : <symptôme> », et remarque qu'il manque l'environnement et les étapes de reproduction. Il les reconstruit à partir des preuves de l'audit (audit.json : constat, evidence, commit audité) s'il en trouve, sinon il pose la question au lieu d'inventer. Il sépare gravité et priorité, cite RGAA 7.3 / 12.9 et WCAG 2.1.1 / 2.1.2 avec l'impact utilisateur, et n'envoie rien dans Jira sans accord.",
+      "files": [],
+      "expectations": [
+        "Le type choisi est Bug",
+        "Le titre suit le format « <Zone> : <symptôme> » et n'est pas vague",
+        "Signale que les étapes de reproduction ou l'environnement manquent, et soit les reconstruit à partir des preuves de l'audit, soit pose la question ; n'invente pas d'étapes",
+        "La description contient Environnement, Étapes pour reproduire numérotées, Résultat attendu, Résultat obtenu, Fréquence, Impact, Preuves",
+        "Gravité et Priorité sont données séparément",
+        "Cite les critères RGAA 7.3 / 12.9 et WCAG 2.1.1 / 2.1.2 et décrit l'impact pour les personnes qui naviguent au clavier",
+        "Aucun ticket n'est créé sans un oui explicite de l'utilisateur"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Ajoute cette story au Jira : « En tant que développeur, je veux activer HSTS et appliquer la CSP complète pour que le site soit sécurisé. » (chantiers de l'audit, règles 199, 210, 212)",
+      "expected_output": "Le skill refuse la forme « En tant que développeur » : il convertit en Task (ou deux Tasks liées si HSTS et CSP ne tiennent pas ensemble en 3 jours), avec Objectif / Pourquoi, Périmètre, Terminé quand en liste à cocher, Risques / Dépendances (par exemple : la CSP doit d'abord être vérifiée en report-only). Il reformule le problème avant la solution, utilise les étiquettes autorisées, propose une estimation et un nom de branche chore/<KEY>-…",
+      "files": [],
+      "expectations": [
+        "Le ticket n'est pas une Story : il est converti en Task (ou en plusieurs Tasks liées)",
+        "Le pourquoi énonce le problème constaté par l'audit (HSTS absent, CSP seulement en report-only) avant la solution",
+        "Contient Objectif / Pourquoi, Périmètre, Terminé quand (liste à cocher), Risques / Dépendances",
+        "Les liens éventuels sont exprimés en relations Jira (blocks, is blocked by, relates to)",
+        "Propose une estimation, et un nom de branche au format <type>/<KEY>-<slug>",
+        "Les étiquettes proviennent de la liste autorisée, sans en inventer",
+        "Ne recopie pas la Definition of Done dans le ticket ; y fait référence"
+      ]
+    }
+  ]
+}

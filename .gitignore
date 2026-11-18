@@ -1,0 +1,7 @@
+.DS_Store
+node_modules/
+__pycache__/
+*.pyc
+# audit data and exported replays belong to the audited project, not here
+.audit-web/
+*-replay.html
