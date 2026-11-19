@@ -23,7 +23,7 @@ Each pair of audit themes (the skill's four-agent split) has its own character i
 name (two Japanese words, one per theme), hair, eyes, clothes and an accessory. The viewer picks
 the character from the theme words in the agent's description (`Opquast · Navigation &
 présentation` → Michi Iro), so the same work keeps the same character across runs. An unknown
-theme or a fifth agent gets a spare look (Hana, Sora, Hoshi, Taiyo).
+theme or a fifth agent gets a spare look (Yorozu, Sora, Hoshi, Taiyo).
 
 | Name         | Meaning                    | Theme words                                     | Accessory  |
 | ------------ | -------------------------- | ----------------------------------------------- | ---------- |

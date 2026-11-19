@@ -747,13 +747,19 @@
         if (view === "side") { p(-2, 6, 3, 8, O); p(-1, 7, 2, 6, hair); }
         else { p(13, 5, 3, 9, O); p(14, 6, 1, 7, hair); }
         break;
-      case "bow":
-        p(10, 1, 5, 3, O); p(11, 2, 1, 1, "#ff5d8f"); p(13, 2, 1, 1, "#ff5d8f"); p(12, 2, 1, 1, "#ffd1df");
-        break;
       case "beanie":
         p(3, -1, 10, 1, O); p(2, 0, 12, 4, a.sprites.pal.c); p(2, 4, 12, 1, O);
         p(3, 1, 10, 1, SPRITES.mix(a.sprites.look.clothes, 0.3)); p(7, -2, 2, 1, C.spark);
         break;
+      case "hachimaki": {
+        // headband with the knot at the back of the head
+        const band = "#ffffff", shade = "#d9d4e6";
+        p(1, 5, 14, 1, band); p(1, 6, 14, 1, shade);
+        if (view === "down") p(7, 5, 2, 2, C.err);
+        if (view === "side") { p(-1, 5, 2, 1, band); p(-2, 6, 2, 1, shade); }
+        if (view === "up") { p(7, 5, 2, 2, shade); p(6, 7, 1, 3, band); p(9, 7, 1, 3, band); }
+        break;
+      }
       case "ahoge":
         p(8, -3, 1, 3, hair); p(9, -4, 1, 2, hair); p(7, -2, 1, 1, dark);
         break;
