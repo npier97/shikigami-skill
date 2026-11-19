@@ -62,7 +62,9 @@ node <skill>/viewer/export-replay.mjs --events demo-run.json --out demo.html   #
 The server prints `VIEWER_URL=http://localhost:<port>/`. Options: `--port` (default: free port),
 `--port-file <path>`, `--skill` (default `shikigami-audit-web`), `--cwd`.
 
-Live mode exits on its own 90 s after the last agent finishes.
+Live mode opens at once on the empty office with Kantoku at the whiteboard; each agent walks
+in to its desk when the audit launches it. Live mode exits on its own 90 s after the last agent
+finishes.
 
 ## What the page shows
 

@@ -103,6 +103,9 @@ const startLive = () => {
   const finished = new Set();
   let lastChange = Date.now();
 
+  // Open with the lead at the whiteboard before the audit launches anyone; agents walk in as they start.
+  emit({ t: Date.now(), kind: "spawn", agentId: "lead", label: "Coordination", lead: true });
+
   const stop = watchProject({
     projectDir,
     skill: opt.skill,

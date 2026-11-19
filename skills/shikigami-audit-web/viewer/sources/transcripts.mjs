@@ -268,6 +268,8 @@ export const watchProject = ({ projectDir, skill, since, emit }) => {
     }
   };
 
-  const timer = setInterval(() => tick().catch((err) => console.error(err)), LIVE_POLL_MS);
+  const run = () => tick().catch((err) => console.error(err));
+  run(); // don't wait a poll interval for agents that already started
+  const timer = setInterval(run, LIVE_POLL_MS);
   return () => clearInterval(timer);
 };

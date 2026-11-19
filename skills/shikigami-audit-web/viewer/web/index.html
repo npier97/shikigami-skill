@@ -208,6 +208,7 @@
     write: [".....##.", "....#.##", "...#.#..", "..#.#...", ".#.#....", "##......", "###....."],
     bulb:  ["..###..", ".#...#.", ".#...#.", "..#.#..", "..###..", "..###..", "...#..."],
     coffee: [".#.#...", "..#.#..", "#####..", "#...###", "#...#.#", "#...###", ".###..."],
+    wait:  ["....####", "......#.", ".....#..", "....####", "###.....", "..#.....", "###....."],
   };
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
   const $ = (id) => document.getElementById(id);
@@ -319,7 +320,7 @@
 
   const spawnLead = (ev, instant) => {
     const sprites = SPRITES.framesFor(SPRITES.LEAD);
-    const a = newAgent(ev, { lead: true, theme: "Coordination", name: sprites.look.name, sprites, hair: sprites.look.hair, state: "walkIn", slot: LEAD_BOARD, i: -1 });
+    const a = newAgent(ev, { lead: true, theme: "Coordination", name: sprites.look.name, sprites, hair: sprites.look.hair, state: "walkIn", slot: LEAD_BOARD, i: -1, text: "Prépare l’audit" });
     agents.set(a.id, a);
     go(a, route(DOOR, LEAD_BOARD, CORRIDOR_X.lead), () => { a.state = "board"; a.face = "down"; maybeMerge(instant); }, instant);
     if (!instant) announce(`${a.name} arrive pour coordonner l’audit.`);
@@ -786,6 +787,8 @@
   const bubbleKind = (a, now) => {
     const busy = a.state === "work" || a.state === "board" || a.state === "merge";
     if (!busy || a.moving) return null;
+    // The lead dozes at the whiteboard until the audit launches its first agent.
+    if (a.lead && a.state === "board" && !workers().length) return "wait";
     if (now < a.bulbUntil) return "bulb";
     if (a.bubble && now < a.bubbleUntil) return a.bubble;
     if (now - a.lastAct > COFFEE_AFTER_MS && !a.lead) return "coffee";
