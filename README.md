@@ -68,13 +68,23 @@ how to edit the characters.
 
 Requirements: Claude Code, Node ≥ 20, Python 3.
 
+As a plugin, from this repository's marketplace:
+
+```bash
+claude plugin marketplace add npier97/shikigami-skill
+claude plugin install shikigami@shikigami
+```
+
+Or, in Claude Code 2.1.275 or later: `/plugin install shikigami --marketplace npier97/shikigami-skill`.
+
 As a personal skill:
 
 ```bash
 cp -R skills/shikigami-audit-web ~/.claude/skills/
 ```
 
-The repository is also laid out as a Claude Code plugin (`.claude-plugin/plugin.json`, `skills/`).
+The repository is both a Claude Code plugin (`.claude-plugin/plugin.json`, `skills/`) and its own
+marketplace (`.claude-plugin/marketplace.json`).
 
 ## Logo
 
