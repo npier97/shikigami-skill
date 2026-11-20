@@ -101,7 +101,7 @@
     { name: "Michi Iro", meaning: "道 le chemin, 色 la couleur", themes: ["navigation", "presentation", "couleur", "contraste", "design"], hair: "#6fd6a0", iris: "#2563eb", clothes: "#3f6e55", acc: "ears" },
     { name: "Mamo Kumo", meaning: "守る protéger, 雲 le nuage", themes: ["securite", "serveur", "perf", "structure", "code"], hair: "#4fcfe0", iris: "#9333ea", clothes: "#35656b", acc: "beanie" },
     // Spare looks for a fifth agent and beyond, or a theme no character above covers.
-    { name: "Hana", meaning: "花, la fleur", themes: [], hair: "#ff7b6b", iris: "#0e7490", clothes: "#7a3f5a", acc: "bow" },
+    { name: "Yorozu", meaning: "万, toutes sortes de choses", themes: [], hair: "#3b3a4a", iris: "#0e7490", clothes: "#3f4a5c", acc: "hachimaki", blush: false },
     { name: "Sora", meaning: "空, le ciel", themes: [], hair: "#b38cff", iris: "#db2777", clothes: "#5b3f7a", acc: "ponytail" },
     { name: "Hoshi", meaning: "星, l'étoile", themes: [], hair: "#ffb347", iris: "#c2410c", clothes: "#7a4a3f", acc: "clip" },
     { name: "Taiyo", meaning: "太陽, le soleil", themes: [], hair: "#f2cf4a", iris: "#b45309", clothes: "#6b5b2f", acc: "ahoge" },
@@ -113,12 +113,15 @@
   const plain = (s) => s.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
 
   // Character for an agent label such as "Opquast · Navigation": the first unused look whose
-  // theme word appears in it, otherwise the first unused look, otherwise wrap around.
+  // theme word appears in it, otherwise the first unused spare look (Yorozu first, for
+  // miscellaneous work), otherwise any unused look, otherwise wrap around.
   const lookIndexFor = (label, taken) => {
     const text = plain(label);
     const free = (i) => !taken.has(i);
     const byTheme = LOOKS.findIndex((l, i) => free(i) && l.themes.some((t) => text.includes(t)));
     if (byTheme >= 0) return byTheme;
+    const spare = LOOKS.findIndex((l, i) => free(i) && !l.themes.length);
+    if (spare >= 0) return spare;
     const next = LOOKS.findIndex((_, i) => free(i));
     return next >= 0 ? next : taken.size % LOOKS.length;
   };
@@ -136,6 +139,7 @@
 
   const paletteFor = (look) => ({
     ...FIXED,
+    b: look.blush === false ? FIXED.s : FIXED.b,
     h: look.hair, H: mix(look.hair, -0.28), l: mix(look.hair, 0.45),
     i: look.iris, e: mix(look.iris, -0.4),
     c: look.clothes, C: mix(look.clothes, -0.25),

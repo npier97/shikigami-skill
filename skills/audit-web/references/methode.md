@@ -4,6 +4,8 @@ Chaque règle est vérifiée sur deux sources : le **site en ligne** (ce que re�
 
 ## Tests du site en ligne (une seule fois, réutilisés pour tous les thèmes)
 
+`scripts/live_checks.py` fait tous les tests ci-dessous et `assets/browser-checks.js` les mesures du navigateur : les lancer plutôt que de refaire ces commandes à la main. Cette liste dit ce qu'ils couvrent et ce qu'il reste à regarder soi-même.
+
 Remplacer `$SITE` par le domaine, et répéter pour l'accueil et chaque page de `config.urls.pages`.
 
 ```bash

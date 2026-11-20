@@ -13,7 +13,7 @@ Les deux fichiers vivent dans `.audit-web/` à la racine du dépôt client. `scr
   "logoDark": "logo-sombre.svg",        // facultatif : variante affichée en mode sombre
   "auditor": { "name": "Studio Exemple", "logo": "studio.svg", "url": "https://studio.example" }, // facultatif, pied de page
   "urls": { "site": "https://acme.example", "pages": ["/", "/reservation", "/compte", "/mentions-legales"] },
-  "scope": {                            // ce qui existe ; guide les N/A
+  "scope": {                            // ce qui existe ; init-audit en déduit les règles N/A
     "shop": false, "accounts": true, "newsletter": false,
     "publicSpaces": false, "pdfs": true, "dataTables": false, "video": true
   },

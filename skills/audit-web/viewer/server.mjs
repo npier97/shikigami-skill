@@ -32,7 +32,7 @@ const { values: opt } = parseArgs({
   options: {
     cwd: { type: "string", default: process.cwd() },
     session: { type: "string" },
-    skill: { type: "string", default: "shikigami-audit-web" },
+    skill: { type: "string", default: "audit-web" },
     replay: { type: "boolean", default: false },
     speed: { type: "string", default: "10" },
     loop: { type: "boolean", default: false },
@@ -102,6 +102,9 @@ const startLive = () => {
   const spawned = new Set();
   const finished = new Set();
   let lastChange = Date.now();
+
+  // Open with the lead at the whiteboard before the audit launches anyone; agents walk in as they start.
+  emit({ t: Date.now(), kind: "spawn", agentId: "lead", label: "Coordination", lead: true });
 
   const stop = watchProject({
     projectDir,

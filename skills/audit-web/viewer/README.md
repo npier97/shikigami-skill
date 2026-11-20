@@ -23,7 +23,7 @@ Each pair of audit themes (the skill's four-agent split) has its own character i
 name (two Japanese words, one per theme), hair, eyes, clothes and an accessory. The viewer picks
 the character from the theme words in the agent's description (`Opquast · Navigation &
 présentation` → Michi Iro), so the same work keeps the same character across runs. An unknown
-theme or a fifth agent gets a spare look (Hana, Sora, Hoshi, Taiyo).
+theme or a fifth agent gets a spare look (Yorozu, Sora, Hoshi, Taiyo).
 
 | Name         | Meaning                    | Theme words                                     | Accessory  |
 | ------------ | -------------------------- | ----------------------------------------------- | ---------- |
@@ -60,9 +60,11 @@ node <skill>/viewer/export-replay.mjs --events demo-run.json --out demo.html   #
 ```
 
 The server prints `VIEWER_URL=http://localhost:<port>/`. Options: `--port` (default: free port),
-`--port-file <path>`, `--skill` (default `shikigami-audit-web`), `--cwd`.
+`--port-file <path>`, `--skill` (default `audit-web`; also matches `shikigami:audit-web` and the old `shikigami-audit-web` names), `--cwd`.
 
-Live mode exits on its own 90 s after the last agent finishes.
+Live mode opens at once on the empty office with Kantoku at the whiteboard; each agent walks
+in to its desk when the audit launches it. Live mode exits on its own 90 s after the last agent
+finishes.
 
 ## What the page shows
 

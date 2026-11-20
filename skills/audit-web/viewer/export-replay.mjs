@@ -22,7 +22,7 @@ const { values: opt } = parseArgs({
     cwd: { type: "string", default: process.cwd() },
     session: { type: "string" },
     dir: { type: "string" },
-    skill: { type: "string", default: "shikigami-audit-web" },
+    skill: { type: "string", default: "audit-web" },
     // A ready-made event list (JSON array) instead of transcripts, e.g. the scripted demo run.
     events: { type: "string" },
     out: { type: "string" },

@@ -2,7 +2,9 @@
 """Générateur du rapport d'audit web (Opquast + correspondances RGAA/WCAG). Bibliothèque standard uniquement.
 
 Utilisation (depuis la racine du dépôt client ; --dir vaut .audit-web par défaut) :
-  build.py init-audit                       crée audit.json avec toutes les règles du catalogue en statut "todo"
+  build.py init-audit                       crée audit.json : règles hors périmètre (config.scope) en N/A, les autres en "todo"
+  build.py batches --out DOSSIER            écrit un lot de règles "todo" par sous-agent (avec leur nom pour l'outil Agent)
+  build.py merge FICHIER...                 fusionne les résultats JSON des sous-agents dans audit.json
   build.py validate [--draft]               vérifie config.json et audit.json (--draft tolère les règles "todo")
   build.py snapshot --commit SHA [--branch B] [--date AAAA-MM-JJ]
                                             enregistre un passage : comptes, historique par règle, état du plan
@@ -19,6 +21,41 @@ SEVERITIES = {"critical", "high", "medium", "low"}
 EFFORTS = {"simple", "moderate", "complex"}
 LANGS = {"fr", "en"}
 RANK = {"fail": 0, "partial": 1, "check": 1, "pass": 2}
+
+# Rules that are N/A by construction when a config.scope flag is false. Kept conservative:
+# only rules that cannot apply without the feature. Rule 46 (terms of use) always applies.
+SCOPE_NA = {
+    "shop": [i for i in range(30, 69) if i != 46] + [208],
+    "accounts": [17, 18, 19, 20, 21, 22, 23, 26, 201, 202, 203, 204, 205],
+    "newsletter": list(range(173, 180)),
+    "publicSpaces": [9, 10, 11],
+    "video": [121, 122, 123, 124],
+    "pdfs": [240, 241],
+    "dataTables": [242, 243],
+}
+NA_REASON = {
+    "fr": {"shop": "Rien n'est vendu : ni panier, ni commande, ni paiement.",
+           "accounts": "Aucun compte utilisateur.",
+           "newsletter": "Aucune lettre d'information.",
+           "publicSpaces": "Aucun espace public de contribution.",
+           "video": "Aucun contenu vidéo ou audio.",
+           "pdfs": "Aucun PDF publié.",
+           "dataTables": "Aucun tableau de données."},
+    "en": {"shop": "Nothing is sold: no cart, order or payment.",
+           "accounts": "No user accounts.",
+           "newsletter": "No newsletter.",
+           "publicSpaces": "No public contribution space.",
+           "video": "No video or audio content.",
+           "pdfs": "No PDFs published.",
+           "dataTables": "No data tables."},
+}
+# One batch per subagent. Names match the live view's characters (see viewer/README.md).
+BATCHES = [
+    ("Contenus & formulaires", [1, 3, 4, 5, 10]),
+    ("Liens & médias", [6, 7, 8, 15]),
+    ("Navigation & présentation", [9, 11]),
+    ("Sécurité & serveur", [2, 12, 13, 14]),
+]
 
 
 def load(path):
@@ -227,17 +264,84 @@ def cmd_validate(d, args):
     print(f"OK. {len(audit.get('rules', []))} règles, {todo} encore à évaluer.")
 
 
+def scope_na(cfg):
+    """{rule id: (flag, reason)} for rules out of scope according to config.scope."""
+    scope, reasons = cfg.get("scope") or {}, NA_REASON.get(cfg.get("lang", "fr"), NA_REASON["fr"])
+    out = {}
+    for flag, ids in SCOPE_NA.items():
+        if scope.get(flag) is False:
+            for rid in ids:
+                out.setdefault(rid, (flag, reasons[flag]))
+    return out
+
+
 def cmd_init_audit(d, args):
     p = d / "audit.json"
     if p.exists() and not args.force:
         sys.exit(f"{p} existe déjà. Utilisez --force pour l'écraser.")
     cat = catalogue()
+    cfg_path = d / "config.json"
+    na = scope_na(load(cfg_path)) if cfg_path.exists() else {}
+    rules = []
+    for r in cat["rules"]:
+        if r["id"] in na:
+            flag, reason = na[r["id"]]
+            rules.append({"id": r["id"], "status": "na", "finding": reason, "fix": "", "evidence": [f"config.json : scope.{flag} = false"]})
+        else:
+            rules.append({"id": r["id"], "status": "todo", "finding": "", "fix": "", "evidence": []})
     audit = {"schema": 1, "meta": {"lede": "", "verdict": "", "method": ""}, "runs": [],
-             "rules": [{"id": r["id"], "status": "todo", "finding": "", "fix": "", "evidence": []} for r in cat["rules"]],
-             "plan": [], "corrections": []}
+             "rules": rules, "plan": [], "corrections": []}
     d.mkdir(parents=True, exist_ok=True)
     save(p, audit)
-    print(f"{p} créé : {len(cat['rules'])} règles à évaluer.")
+    print(f"{p} créé : {len(rules) - len(na)} règles à évaluer, {len(na)} hors périmètre (N/A d'après config.scope).")
+
+
+def cmd_batches(d, args):
+    audit = load(d / "audit.json")
+    todo = {r["id"] for r in audit["rules"] if r.get("status") not in STATUSES}
+    if args.ids:
+        todo &= {int(x) if x.isdigit() else x for x in args.ids.split(",")}
+    out = pathlib.Path(args.out)
+    out.mkdir(parents=True, exist_ok=True)
+    cat = catalogue()["rules"]
+    for i, (name, themes) in enumerate(BATCHES, 1):
+        rules = [r for r in cat if r["theme"] in themes and r["id"] in todo]
+        if not rules:
+            continue
+        f = out / f"lot-{i}.json"
+        save(f, rules)
+        print(f"{f}\tOpquast · {name} ({len(rules)})")
+
+
+def cmd_merge(d, args):
+    p = d / "audit.json"
+    audit = load(p)
+    by_id = {r["id"]: r for r in audit["rules"]}
+    merged, problems = 0, []
+    for f in args.files:
+        for e in load(pathlib.Path(f)):
+            rid = e.get("id")
+            if isinstance(rid, str) and rid.isdigit():
+                rid = int(rid)
+            if rid not in by_id:
+                problems.append(f"{f} : règle inconnue {rid!r}")
+                continue
+            if e.get("status") not in STATUSES:
+                problems.append(f"{f} : règle {rid} : statut {e.get('status')!r}")
+                continue
+            r = by_id[rid]
+            for k in ("status", "finding", "fix", "evidence"):
+                r[k] = e.get(k, "" if k != "evidence" else [])
+            if e.get("impact"):
+                r["impact"] = e["impact"]
+            else:
+                r.pop("impact", None)
+            merged += 1
+    save(p, audit)
+    left = sum(1 for r in audit["rules"] if r.get("status") not in STATUSES)
+    for msg in problems:
+        print("ATTENTION", msg)
+    print(f"{merged} règles fusionnées, {left} encore à évaluer.")
 
 
 def main():
@@ -249,9 +353,12 @@ def main():
     sub.add_parser("diff")
     r = sub.add_parser("render"); r.add_argument("--out")
     i = sub.add_parser("init-audit"); i.add_argument("--force", action="store_true")
+    b = sub.add_parser("batches"); b.add_argument("--out", required=True); b.add_argument("--ids", help="limiter aux règles listées (relance), séparées par des virgules")
+    m = sub.add_parser("merge"); m.add_argument("files", nargs="+")
     args = ap.parse_args()
     d = pathlib.Path(args.dir)
-    {"validate": cmd_validate, "snapshot": cmd_snapshot, "diff": cmd_diff, "render": cmd_render, "init-audit": cmd_init_audit}[args.cmd](d, args)
+    {"validate": cmd_validate, "snapshot": cmd_snapshot, "diff": cmd_diff, "render": cmd_render, "init-audit": cmd_init_audit,
+     "batches": cmd_batches, "merge": cmd_merge}[args.cmd](d, args)
 
 
 if __name__ == "__main__":

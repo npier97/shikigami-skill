@@ -18,6 +18,14 @@ const LIVE_POLL_MS = 500;
 // A file created slightly before the server started still belongs to this run.
 const LIVE_GRACE_MS = 5_000;
 const MAX_REPLAY_GAP_MS = 4_000;
+
+// Names a run can be recorded under: the skill alone (copied into ~/.claude/skills), the plugin
+// install ("shikigami:audit-web"), and the pre-rename names, so older runs still replay.
+// Never match any "<plugin>:audit-web": another plugin may ship a skill with the same name.
+const PLUGIN = "shikigami";
+const LEGACY = { "audit-web": ["shikigami-audit-web", "shikigami:shikigami-audit-web"] };
+const skillNames = (skill) => [skill, `${PLUGIN}:${skill}`, ...(LEGACY[skill] ?? [])];
+const isSkill = (name, skill) => skillNames(skill).includes(name);
 const LOOP_PAUSE_MS = 4_000;
 // In a replay, the lead's work around the run: shared checks before, merge and publish after.
 const LEAD_BEFORE_MS = 10 * 60_000;
@@ -86,7 +94,7 @@ const createAgentReader = (file, { skill }) => {
       } catch {
         continue;
       }
-      if (skillOk === null && rec.attributionSkill) skillOk = rec.attributionSkill === skill;
+      if (skillOk === null && rec.attributionSkill) skillOk = isSkill(rec.attributionSkill, skill);
       const t = Date.parse(rec.timestamp ?? "");
       if (Number.isNaN(t)) continue;
       lastT = Math.max(lastT, t);
@@ -155,7 +163,7 @@ const createLeadReader = (file, { skill, from = 0, to = Infinity }) => {
       } catch {
         continue;
       }
-      if (rec.attributionSkill !== skill || rec.isSidechain) continue;
+      if (!isSkill(rec.attributionSkill, skill) || rec.isSidechain) continue;
       const t = Date.parse(rec.timestamp ?? "");
       if (Number.isNaN(t) || t < from || t > to) continue;
       if (!spawned) {
@@ -187,12 +195,13 @@ const sessionDirs = async (projectDir) => {
 // Most recent session whose `skill` subagents all finished: an interrupted run would
 // replay agents that never leave their desks.
 export const latestSessionFor = async (projectDir, skill) => {
-  const marker = `"attributionSkill":"${skill}"`;
+  const markers = skillNames(skill).map((name) => `"attributionSkill":"${name}"`);
   for (const { dir } of await sessionDirs(projectDir)) {
     let found = 0;
     let complete = true;
     for (const file of await agentFilesIn(dir)) {
-      if (!(await readFile(file, "utf8")).includes(marker)) continue;
+      const text = await readFile(file, "utf8");
+      if (!markers.some((m) => text.includes(m))) continue;
       found++;
       if (!(await readMeta(file))?.finished) complete = false;
     }
@@ -268,6 +277,8 @@ export const watchProject = ({ projectDir, skill, since, emit }) => {
     }
   };
 
-  const timer = setInterval(() => tick().catch((err) => console.error(err)), LIVE_POLL_MS);
+  const run = () => tick().catch((err) => console.error(err));
+  run(); // don't wait a poll interval for agents that already started
+  const timer = setInterval(run, LIVE_POLL_MS);
   return () => clearInterval(timer);
 };

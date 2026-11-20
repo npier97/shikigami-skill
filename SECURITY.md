@@ -20,12 +20,15 @@ Only the latest commit on `main` is supported. There are no released versions ye
 
 This repository holds Claude Code skills and a local viewer. Nothing in it is a hosted service.
 
-- **The audit skill** (`skills/shikigami-audit-web`) runs inside your Claude Code session, with
+- **The audit skill** (`skills/audit-web`) runs inside your Claude Code session, with
   that session's permissions. It reads the audited repository, queries the audited site with
   `curl`, `dig` and `openssl`, and writes its data to `.audit-web/` in that repository. It
   publishes the report as a Claude Artifact, private by default, and sends tickets to Jira only
   after you approve them explicitly.
 - **`scripts/build.py`** uses the Python standard library only and makes no network calls.
+- **`scripts/live_checks.py`** uses the Python standard library and calls `curl`, `dig` and
+  `openssl` with GET/HEAD requests only, against the site in `.audit-web/config.json`. It writes
+  only to the output folder you pass it.
 - **The viewer** (`viewer/`) is a Node.js server with no dependencies. It:
   - listens on `127.0.0.1` only, on a free port by default, and refuses any request not
     addressed to `localhost`, `127.0.0.1` or `[::1]` (protection against DNS rebinding);
