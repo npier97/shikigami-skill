@@ -8,7 +8,7 @@
       "name": "shikigami",
       "source": "./",
       "description": "Opquast web quality audit skill for Claude Code, with Shikigami: a live pixel-art office to watch sub-agents work.",
-      "version": "0.1.0"
+      "version": "0.2.0"
     }
   ]
 }
